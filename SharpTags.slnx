@@ -1,0 +1,7 @@
+<Solution>
+	<Project Path="SharpTags.AspNetCore/SharpTags.AspNetCore.csproj" />
+	<Project Path="SharpTags.ExampleWebApp/SharpTags.ExampleWebApp.csproj" />
+	<Project Path="SharpTags.SourceGenerator/SharpTags.SourceGenerator.csproj" />
+	<Project Path="SharpTags.UnitTests/SharpTags.UnitTests.csproj" />
+	<Project Path="SharpTags/SharpTags.csproj" />
+</Solution>

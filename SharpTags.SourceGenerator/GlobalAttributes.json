@@ -1,0 +1,102 @@
+{
+	"html": [
+		{
+			"name": "AccessKey",
+			"type": "char"
+		},
+		{
+			"name": "AutoCapitalize",
+			"type": "enum"
+		},
+		{
+			"name": "AutoCorrect",
+			"type": "ternary"
+		},
+		{
+			"name": "AutoFocus",
+			"type": "bool"
+		},
+		{
+			"name": "Class",
+			"type": "list"
+		},
+		{
+			"name": "ContentEditable",
+			"type": "enum"
+		},
+		{
+			"name": "Draggable",
+			"type": "ternary"
+		},
+		{
+			"name": "EnterKeyHint",
+			"type": "enum"
+		},
+		{
+			"name": "Hidden",
+			"type": "enum"
+		},
+		{
+			"name": "Id",
+			"type": "string"
+		},
+		{
+			"name": "Inert",
+			"type": "bool"
+		},
+		{
+			"name": "InputMode",
+			"type": "enum"
+		},
+		{
+			"name": "Language",
+			"attribute": "lang",
+			"type": "string"
+		},
+		{
+			"name": "Part",
+			"type": "list"
+		},
+		{
+			"name": "PopOver",
+			"type": "enum"
+		},
+		{
+			"name": "Role",
+			"type": "string"
+		},
+		{
+			"name": "Slot",
+			"type": "string"
+		},
+		{
+			"name": "SpellCheck",
+			"type": "ternary"
+		},
+		{
+			"name": "Style",
+			"type": "string"
+		},
+		{
+			"name": "TabIndex",
+			"type": "int"
+		},
+		{
+			"name": "TextDirection",
+			"attribute": "dir",
+			"type": "enum"
+		},
+		{
+			"name": "Title",
+			"type": "string"
+		},
+		{
+			"name": "Translate",
+			"type": "ternary"
+		},
+		{
+			"name": "WritingSuggestions",
+			"type": "ternary"
+		}
+	]
+}

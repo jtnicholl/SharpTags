@@ -1,0 +1,1557 @@
+{
+	"html": [
+		{
+			"name": "Anchor",
+			"element": "A",
+			"attributes": [
+				{
+					"name": "Download",
+					"type": "string"
+				},
+				{
+					"name": "Href",
+					"type": "string"
+				},
+				{
+					"name": "HrefLanguage",
+					"attribute": "HrefLang",
+					"type": "string"
+				},
+				{
+					"name": "Ping",
+					"type": "list"
+				},
+				{
+					"name": "ReferrerPolicy",
+					"type": "enum"
+				},
+				{
+					"name": "Relationships",
+					"attribute": "Rel",
+					"type": "list"
+				},
+				{
+					"name": "Target",
+					"type": "enum"
+				},
+				{
+					"name": "Type",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "Abbreviation",
+			"element": "Abbr"
+		},
+		{
+			"name": "Address"
+		},
+		{
+			"name": "Area",
+			"void": true,
+			"attributes": [
+				{
+					"name": "Alt",
+					"type": "string"
+				},
+				{
+					"name": "Coords",
+					"type": "string"
+				},
+				{
+					"name": "Download",
+					"type": "string"
+				},
+				{
+					"name": "Href",
+					"type": "string"
+				},
+				{
+					"name": "Ping",
+					"type": "list"
+				},
+				{
+					"name": "ReferrerPolicy",
+					"type": "enum"
+				},
+				{
+					"name": "Shape",
+					"type": "enum"
+				},
+				{
+					"name": "Relationships",
+					"attribute": "Rel",
+					"type": "list"
+				},
+				{
+					"name": "Target",
+					"type": "enum"
+				}
+			]
+		},
+		{
+			"name": "Article"
+		},
+		{
+			"name": "Aside"
+		},
+		{
+			"name": "Audio",
+			"attributes": [
+				{
+					"name": "AutoPlay",
+					"type": "bool"
+				},
+				{
+					"name": "Controls",
+					"type": "bool"
+				},
+				{
+					"name": "ControlsList",
+					"type": "enum"
+				},
+				{
+					"name": "CrossOrigin",
+					"type": "enum"
+				},
+				{
+					"name": "DisableRemotePlayback",
+					"type": "bool"
+				},
+				{
+					"name": "Loop",
+					"type": "bool"
+				},
+				{
+					"name": "Muted",
+					"type": "bool"
+				},
+				{
+					"name": "Preload",
+					"type": "enum"
+				},
+				{
+					"name": "Source",
+					"attribute": "Src",
+					"type": "uri"
+				}
+			]
+		},
+		{
+			"name": "Bold",
+			"element": "B"
+		},
+		{
+			"name": "Base",
+			"void": true,
+			"attributes": [
+				{
+					"name": "Href",
+					"type": "string"
+				},
+				{
+					"name": "Target",
+					"type": "enum"
+				}
+			]
+		},
+		{
+			"name": "Bidirectional",
+			"element": "Bdi"
+		},
+		{
+			"name": "BidirectionalOverride",
+			"element": "Bdo"
+		},
+		{
+			"name": "BlockQuote",
+			"attributes": [
+				{
+					"name": "Cite",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "Body"
+		},
+		{
+			"name": "Break",
+			"element": "Br",
+			"void": true
+		},
+		{
+			"name": "Button",
+			"attributes": [
+				{
+					"name": "Command",
+					"type": "string"
+				},
+				{
+					"name": "CommandFor",
+					"type": "string"
+				},
+				{
+					"name": "Disabled",
+					"type": "bool"
+				},
+				{
+					"name": "Form",
+					"type": "string"
+				},
+				{
+					"name": "FormAction",
+					"type": "string"
+				},
+				{
+					"name": "FormMimeType",
+					"attribute": "FormEncType",
+					"type": "enum"
+				},
+				{
+					"name": "FormMethod",
+					"type": "enum"
+				},
+				{
+					"name": "SkipFormValidation",
+					"attribute": "FormNoValidate",
+					"type": "bool"
+				},
+				{
+					"name": "FormTarget",
+					"type": "enum",
+					"enum": "Target"
+				},
+				{
+					"name": "Name",
+					"type": "string"
+				},
+				{
+					"name": "PopOverTarget",
+					"type": "string"
+				},
+				{
+					"name": "PopOverTargetAction",
+					"type": "enum"
+				},
+				{
+					"name": "Type",
+					"type": "enum",
+					"enum": "ButtonType"
+				},
+				{
+					"name": "Value",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "Canvas",
+			"attributes": [
+				{
+					"name": "Height",
+					"type": "int"
+				},
+				{
+					"name": "Width",
+					"type": "int"
+				}
+			]
+		},
+		{
+			"name": "Caption"
+		},
+		{
+			"name": "Cite"
+		},
+		{
+			"name": "Code"
+		},
+		{
+			"name": "Column",
+			"element": "Col",
+			"void": true,
+			"attributes": [
+				{
+					"name": "Span",
+					"type": "int"
+				}
+			]
+		},
+		{
+			"name": "ColumnGroup",
+			"element": "ColGroup",
+			"attributes": [
+				{
+					"name": "Span",
+					"type": "int"
+				}
+			]
+		},
+		{
+			"name": "Data",
+			"attributes": [
+				{
+					"name": "Value",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "DataList"
+		},
+		{
+			"name": "DescriptionDetails",
+			"element": "DD"
+		},
+		{
+			"name": "Deleted",
+			"element": "Del",
+			"attributes": [
+				{
+					"name": "Cite",
+					"type": "string"
+				},
+				{
+					"name": "DateTime",
+					"type": "plaindatetime"
+				}
+			]
+		},
+		{
+			"name": "Details",
+			"attributes": [
+				{
+					"name": "Open",
+					"type": "bool"
+				},
+				{
+					"name": "Name",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "Definition",
+			"element": "Dfn"
+		},
+		{
+			"name": "Dialog",
+			"attributes": [
+				{
+					"name": "ClosedBy",
+					"type": "enum"
+				},
+				{
+					"name": "Open",
+					"type": "bool"
+				}
+			]
+		},
+		{
+			"name": "Div"
+		},
+		{
+			"name": "DescriptionList",
+			"element": "DL"
+		},
+		{
+			"name": "DescriptionTerm",
+			"element": "DT"
+		},
+		{
+			"name": "Emphasis",
+			"element": "Em"
+		},
+		{
+			"name": "Embed",
+			"void": true,
+			"attributes": [
+				{
+					"name": "Height",
+					"type": "number"
+				},
+				{
+					"name": "Source",
+					"attribute": "Src",
+					"type": "uri"
+				},
+				{
+					"name": "Type",
+					"type": "mimetype"
+				},
+				{
+					"name": "Width",
+					"type": "number"
+				}
+			]
+		},
+		{
+			"name": "FieldSet",
+			"attributes": [
+				{
+					"name": "Disabled",
+					"type": "bool"
+				},
+				{
+					"name": "Form",
+					"type": "string"
+				},
+				{
+					"name": "Name",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "FigureCaption",
+			"element": "FigCaption"
+		},
+		{
+			"name": "Figure"
+		},
+		{
+			"name": "Footer"
+		},
+		{
+			"name": "Form",
+			"attributes": [
+				{
+					"name": "Action",
+					"type": "uri"
+				},
+				{
+					"name": "AutoComplete",
+					"type": "ternary"
+				},
+				{
+					"name": "MimeType",
+					"attribute": "EncType",
+					"type": "enum",
+					"enum": "FormMimeType"
+				},
+				{
+					"name": "Method",
+					"type": "enum",
+					"enum": "FormMethod"
+				},
+				{
+					"name": "Name",
+					"type": "string"
+				},
+				{
+					"name": "SkipValidation",
+					"attribute": "NoValidate",
+					"type": "bool"
+				},
+				{
+					"name": "Relationships",
+					"attribute": "Rel",
+					"type": "list"
+				},
+				{
+					"name": "Target",
+					"type": "enum"
+				}
+			]
+		},
+		{
+			"name": "Heading1",
+			"element": "H1"
+		},
+		{
+			"name": "Heading2",
+			"element": "H2"
+		},
+		{
+			"name": "Heading3",
+			"element": "H3"
+		},
+		{
+			"name": "Heading4",
+			"element": "H4"
+		},
+		{
+			"name": "Heading5",
+			"element": "H5"
+		},
+		{
+			"name": "Heading6",
+			"element": "H6"
+		},
+		{
+			"name": "Head"
+		},
+		{
+			"name": "Header"
+		},
+		{
+			"name": "HeadingGroup",
+			"element": "HGroup"
+		},
+		{
+			"name": "HorizontalRule",
+			"element": "HR",
+			"void": true
+		},
+		{
+			"name": "Html"
+		},
+		{
+			"name": "Italics",
+			"element": "I"
+		},
+		{
+			"name": "IFrame",
+			"element": "IFrame",
+			"attributes": [
+				{
+					"name": "Allow",
+					"type": "list"
+				},
+				{
+					"name": "Height",
+					"type": "number"
+				},
+				{
+					"name": "Loading",
+					"type": "enum"
+				},
+				{
+					"name": "Name",
+					"type": "string"
+				},
+				{
+					"name": "ReferrerPolicy",
+					"type": "enum"
+				},
+				{
+					"name": "Sandbox",
+					"type": "enumlist"
+				},
+				{
+					"name": "Source",
+					"attribute": "Src",
+					"type": "uri"
+				},
+				{
+					"name": "SourceDocument",
+					"attribute": "SrcDoc",
+					"type": "sourceDocument",
+					"summary": "Not yet implemented. Do not use."
+				},
+				{
+					"name": "Width",
+					"type": "number"
+				}
+			]
+		},
+		{
+			"name": "Image",
+			"element": "Img",
+			"void": true,
+			"attributes": [
+				{
+					"name": "AltText",
+					"attribute": "Alt",
+					"type": "string"
+				},
+				{
+					"name": "CrossOrigin",
+					"type": "enum"
+				},
+				{
+					"name": "Decoding",
+					"type": "enum"
+				},
+				{
+					"name": "ElementTiming",
+					"type": "string"
+				},
+				{
+					"name": "FetchPriority",
+					"type": "enum"
+				},
+				{
+					"name": "Height",
+					"type": "int"
+				},
+				{
+					"name": "IsMap",
+					"type": "bool"
+				},
+				{
+					"name": "Loading",
+					"type": "enum"
+				},
+				{
+					"name": "ReferrerPolicy",
+					"type": "list"
+				},
+				{
+					"name": "Sizes",
+					"type": "list",
+					"list": "comma"
+				},
+				{
+					"name": "Source",
+					"attribute": "Src",
+					"type": "uri"
+				},
+				{
+					"name": "SourceSet",
+					"attribute": "SrcSet",
+					"type": "list"
+				},
+				{
+					"name": "Width",
+					"type": "int"
+				},
+				{
+					"name": "UseMap",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "Input",
+			"void": true,
+			"attributes": [
+				{
+					"name": "Accept",
+					"type": "list",
+					"list": "comma"
+				},
+				{
+					"name": "AltText",
+					"attribute": "Alt",
+					"type": "string"
+				},
+				{
+					"name": "AutoComplete",
+					"type": "list"
+				},
+				{
+					"name": "Capture",
+					"type": "enum"
+				},
+				{
+					"name": "Checked",
+					"type": "bool"
+				},
+				{
+					"name": "DirectionName",
+					"attribute": "DirName",
+					"type": "string"
+				},
+				{
+					"name": "Disabled",
+					"type": "bool"
+				},
+				{
+					"name": "Form",
+					"type": "string"
+				},
+				{
+					"name": "FormAction",
+					"type": "string"
+				},
+				{
+					"name": "FormMimeType",
+					"attribute": "FormEncType",
+					"type": "enum"
+				},
+				{
+					"name": "FormMethod",
+					"type": "enum"
+				},
+				{
+					"name": "SkipFormValidation",
+					"attribute": "FormNoValidate",
+					"type": "bool"
+				},
+				{
+					"name": "FormTarget",
+					"type": "enum",
+					"enum": "Target"
+				},
+				{
+					"name": "Height",
+					"type": "int"
+				},
+				{
+					"name": "MaxValue",
+					"attribute": "Max",
+					"type": "string"
+				},
+				{
+					"name": "MaxLength",
+					"type": "int"
+				},
+				{
+					"name": "MinValue",
+					"attribute": "Min",
+					"type": "string"
+				},
+				{
+					"name": "MinLength",
+					"type": "int"
+				},
+				{
+					"name": "Multiple",
+					"type": "bool"
+				},
+				{
+					"name": "Name",
+					"type": "string"
+				},
+				{
+					"name": "Pattern",
+					"type": "string"
+				},
+				{
+					"name": "Placeholder",
+					"type": "string"
+				},
+				{
+					"name": "PopOverTarget",
+					"type": "string"
+				},
+				{
+					"name": "PopOverTargetAction",
+					"type": "enum"
+				},
+				{
+					"name": "Readonly",
+					"type": "bool"
+				},
+				{
+					"name": "Required",
+					"type": "bool"
+				},
+				{
+					"name": "Size",
+					"type": "number"
+				},
+				{
+					"name": "Source",
+					"attribute": "Src",
+					"type": "uri"
+				},
+				{
+					"name": "Step",
+					"type": "string"
+				},
+				{
+					"name": "Type",
+					"type": "enum",
+					"enum": "InputType"
+				},
+				{
+					"name": "Value",
+					"type": "string"
+				},
+				{
+					"name": "Width",
+					"type": "number"
+				}
+			]
+		},
+		{
+			"name": "Inserted",
+			"element": "Ins",
+			"attributes": [
+				{
+					"name": "Cite",
+					"type": "uri"
+				},
+				{
+					"name": "DateTime",
+					"type": "plaindatetime"
+				}
+			]
+		},
+		{
+			"name": "Key",
+			"element": "Kbd"
+		},
+		{
+			"name": "Label",
+			"attributes": [
+				{
+					"name": "For",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "Legend"
+		},
+		{
+			"name": "ListItem",
+			"element": "LI",
+			"attributes": [
+				{
+					"name": "Value",
+					"type": "int"
+				}
+			]
+		},
+		{
+			"name": "Link",
+			"void": true,
+			"attributes": [
+				{
+					"name": "As",
+					"type": "enum",
+					"enum": "LinkAs"
+				},
+				{
+					"name": "Blocking",
+					"type": "enum"
+				},
+				{
+					"name": "CrossOrigin",
+					"attribute": "Cross-Origin",
+					"type": "enum"
+				},
+				{
+					"name": "Disabled",
+					"type": "bool"
+				},
+				{
+					"name": "FetchPriority",
+					"type": "enum"
+				},
+				{
+					"name": "Href",
+					"type": "uri"
+				},
+				{
+					"name": "HrefLanguage",
+					"attribute": "HrefLang",
+					"type": "string"
+				},
+				{
+					"name": "ImageSizes",
+					"type": "list",
+					"list": "comma"
+				},
+				{
+					"name": "ImageSourceSet",
+					"attribute": "ImageSrcSet",
+					"type": "list",
+					"list": "comma"
+				},
+				{
+					"name": "Integrity",
+					"type": "string"
+				},
+				{
+					"name": "ReferrerPolicy",
+					"type": "enum"
+				},
+				{
+					"name": "Relationships",
+					"attribute": "Rel",
+					"type": "list"
+				},
+				{
+					"name": "Sizes",
+					"type": "list"
+				},
+				{
+					"name": "Type",
+					"type": "mimetype"
+				}
+			]
+		},
+		{
+			"name": "Main"
+		},
+		{
+			"name": "Map",
+			"attributes": [
+				{
+					"name": "Name",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "Marked",
+			"element": "Mark"
+		},
+		{
+			"name": "Menu"
+		},
+		{
+			"name": "Meta",
+			"void": true,
+			"attributes": [
+				{
+					"name": "CharacterSet",
+					"attribute": "CharSet",
+					"type": "enum"
+				},
+				{
+					"name": "Content",
+					"type": "string"
+				},
+				{
+					"name": "HttpEquivalent",
+					"attribute": "Http-Equiv",
+					"type": "enum"
+				},
+				{
+					"name": "Media",
+					"type": "string"
+				},
+				{
+					"name": "Name",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "Meter",
+			"attributes": [
+				{
+					"name": "Value",
+					"type": "number"
+				},
+				{
+					"name": "Minimum",
+					"attribute": "Min",
+					"type": "number"
+				},
+				{
+					"name": "Maximum",
+					"attribute": "Max",
+					"type": "number"
+				},
+				{
+					"name": "Low",
+					"type": "number"
+				},
+				{
+					"name": "High",
+					"type": "number"
+				},
+				{
+					"name": "Optimum",
+					"type": "number"
+				}
+			]
+		},
+		{
+			"name": "Navigation",
+			"element": "Nav"
+		},
+		{
+			"name": "NoScript"
+		},
+		{
+			"name": "Object",
+			"attributes": [
+				{
+					"name": "Form",
+					"type": "string"
+				},
+				{
+					"name": "Height",
+					"type": "int"
+				},
+				{
+					"name": "Name",
+					"type": "string"
+				},
+				{
+					"name": "Type",
+					"type": "mimetype"
+				},
+				{
+					"name": "Width",
+					"type": "int"
+				}
+			]
+		},
+		{
+			"name": "OrderedList",
+			"element": "OL",
+			"attributes": [
+				{
+					"name": "Reversed",
+					"type": "bool"
+				},
+				{
+					"name": "Start",
+					"type": "int"
+				},
+				{
+					"name": "Type",
+					"type": "enum",
+					"enum": "OrderedListType"
+				}
+			]
+		},
+		{
+			"name": "OptionGroup",
+			"element": "OptGroup",
+			"attributes": [
+				{
+					"name": "Disabled",
+					"type": "bool"
+				},
+				{
+					"name": "Label",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "Option",
+			"attributes": [
+				{
+					"name": "Disabled",
+					"type": "bool"
+				},
+				{
+					"name": "Label",
+					"type": "string"
+				},
+				{
+					"name": "Selected",
+					"type": "bool"
+				},
+				{
+					"name": "Value",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "Output",
+			"attributes": [
+				{
+					"name": "Disabled",
+					"type": "bool"
+				},
+				{
+					"name": "For",
+					"type": "string"
+				},
+				{
+					"name": "Form",
+					"type": "string"
+				},
+				{
+					"name": "Name",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "Paragraph",
+			"element": "P"
+		},
+		{
+			"name": "Picture"
+		},
+		{
+			"name": "Preformatted",
+			"element": "Pre"
+		},
+		{
+			"name": "Progress",
+			"attributes": [
+				{
+					"name": "Max",
+					"type": "number"
+				},
+				{
+					"name": "Value",
+					"type": "number"
+				}
+			]
+		},
+		{
+			"name": "Quote",
+			"element": "Q",
+			"attributes": [
+				{
+					"name": "Cite",
+					"type": "uri"
+				}
+			]
+		},
+		{
+			"name": "RubyParentheses",
+			"element": "RP"
+		},
+		{
+			"name": "RubyText",
+			"element": "RT"
+		},
+		{
+			"name": "Ruby"
+		},
+		{
+			"name": "Strikethrough",
+			"element": "S"
+		},
+		{
+			"name": "Sample",
+			"element": "Samp"
+		},
+		{
+			"name": "Script",
+			"attributes": [
+				{
+					"name": "Async",
+					"type": "bool"
+				},
+				{
+					"name": "Blocking",
+					"type": "enum"
+				},
+				{
+					"name": "CrossOrigin",
+					"type": "enum"
+				},
+				{
+					"name": "Defer",
+					"type": "bool"
+				},
+				{
+					"name": "FetchPriority",
+					"type": "enum"
+				},
+				{
+					"name": "Integrity",
+					"type": "string"
+				},
+				{
+					"name": "NoModule",
+					"type": "bool"
+				},
+				{
+					"name": "Nonce",
+					"type": "string"
+				},
+				{
+					"name": "ReferrerPolicy",
+					"type": "enum"
+				},
+				{
+					"name": "Source",
+					"attribute": "Src",
+					"type": "uri"
+				},
+				{
+					"name": "Type",
+					"type": "enum",
+					"enum": "ScriptType"
+				}
+			]
+		},
+		{
+			"name": "Search"
+		},
+		{
+			"name": "Section"
+		},
+		{
+			"name": "Select",
+			"attributes": [
+				{
+					"name": "AutoComplete",
+					"type": "list"
+				},
+				{
+					"name": "Disabled",
+					"type": "bool"
+				},
+				{
+					"name": "Form",
+					"type": "string"
+				},
+				{
+					"name": "Multiple",
+					"type": "bool"
+				},
+				{
+					"name": "Name",
+					"type": "string"
+				},
+				{
+					"name": "Required",
+					"type": "bool"
+				},
+				{
+					"name": "Size",
+					"type": "int"
+				}
+			]
+		},
+		{
+			"name": "SelectedContent"
+		},
+		{
+			"name": "Slot",
+			"attributes": [
+				{
+					"name": "Name",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "Small"
+		},
+		{
+			"name": "Source",
+			"void": true,
+			"attributes": [
+				{
+					"name": "Height",
+					"type": "int"
+				},
+				{
+					"name": "Type",
+					"type": "string"
+				},
+				{
+					"name": "SourceUrl",
+					"attribute": "Src",
+					"type": "uri"
+				},
+				{
+					"name": "SourceSet",
+					"attribute": "SrcSet",
+					"type": "list"
+				},
+				{
+					"name": "Sizes",
+					"type": "list",
+					"list": "comma"
+				},
+				{
+					"name": "Media",
+					"type": "string"
+				},
+				{
+					"name": "Width",
+					"type": "int"
+				}
+			]
+		},
+		{
+			"name": "ContentSpan",
+			"element": "Span"
+		},
+		{
+			"name": "Strong"
+		},
+		{
+			"name": "Style",
+			"attributes": [
+				{
+					"name": "Blocking",
+					"type": "enum"
+				},
+				{
+					"name": "Media",
+					"type": "string"
+				},
+				{
+					"name": "Nonce",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "Subscript",
+			"element": "Sub"
+		},
+		{
+			"name": "Summary"
+		},
+		{
+			"name": "Superscript",
+			"element": "Sup"
+		},
+		{
+			"name": "Table"
+		},
+		{
+			"name": "TableBody",
+			"element": "TBody"
+		},
+		{
+			"name": "TableData",
+			"element": "TD",
+			"attributes": [
+				{
+					"name": "ColumnSpan",
+					"attribute": "ColSpan",
+					"type": "int"
+				},
+				{
+					"name": "Headers",
+					"type": "list"
+				},
+				{
+					"name": "RowSpan",
+					"type": "int"
+				}
+			]
+		},
+		{
+			"name": "Template",
+			"attributes": [
+				{
+					"name": "ShadowRootMode",
+					"type": "enum"
+				},
+				{
+					"name": "ShadowRootClonable",
+					"type": "bool"
+				},
+				{
+					"name": "ShadowRootCustomElementRegistry",
+					"type": "bool"
+				},
+				{
+					"name": "ShadowRootDelegatesFocus",
+					"type": "bool"
+				},
+				{
+					"name": "ShadowRootSerializable",
+					"type": "bool"
+				}
+			]
+		},
+		{
+			"name": "TextArea",
+			"attributes": [
+				{
+					"name": "AutoComplete",
+					"type": "list"
+				},
+				{
+					"name": "Columns",
+					"attribute": "Cols",
+					"type": "int"
+				},
+				{
+					"name": "DirectionName",
+					"attribute": "DirName",
+					"type": "string"
+				},
+				{
+					"name": "Disabled",
+					"type": "bool"
+				},
+				{
+					"name": "Form",
+					"type": "string"
+				},
+				{
+					"name": "MaxLength",
+					"type": "int"
+				},
+				{
+					"name": "MinLength",
+					"type": "int"
+				},
+				{
+					"name": "Name",
+					"type": "string"
+				},
+				{
+					"name": "Placeholder",
+					"type": "string"
+				},
+				{
+					"name": "Readonly",
+					"type": "bool"
+				},
+				{
+					"name": "Required",
+					"type": "bool"
+				},
+				{
+					"name": "Rows",
+					"type": "int"
+				},
+				{
+					"name": "Wrap",
+					"type": "enum"
+				}
+			]
+		},
+		{
+			"name": "TableFoot",
+			"element": "TFoot"
+		},
+		{
+			"name": "TableHeader",
+			"element": "TH",
+			"attributes": [
+				{
+					"name": "Abbreviation",
+					"attribute": "Abbr",
+					"type": "string"
+				},
+				{
+					"name": "ColumnSpan",
+					"attribute": "ColSpan",
+					"type": "int"
+				},
+				{
+					"name": "Headers",
+					"type": "list"
+				},
+				{
+					"name": "RowSpan",
+					"type": "int"
+				},
+				{
+					"name": "Scope",
+					"type": "enum",
+					"enum": "TableHeaderScope"
+				}
+			]
+		},
+		{
+			"name": "TableHead",
+			"element": "THead"
+		},
+		{
+			"name": "Time",
+			"attributes": [
+				{
+					"name": "DateTime",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "Title"
+		},
+		{
+			"name": "TableRow",
+			"element": "TR"
+		},
+		{
+			"name": "Track",
+			"void": true,
+			"attributes": [
+				{
+					"name": "Default",
+					"type": "bool"
+				},
+				{
+					"name": "Kind",
+					"type": "enum",
+					"enum": "TrackKind"
+				},
+				{
+					"name": "Label",
+					"type": "string"
+				},
+				{
+					"name": "Source",
+					"attribute": "Src",
+					"type": "uri"
+				},
+				{
+					"name": "SourceLanguage",
+					"attribute": "SrcLang",
+					"type": "string"
+				}
+			]
+		},
+		{
+			"name": "Underline",
+			"element": "U"
+		},
+		{
+			"name": "UnorderedList",
+			"element": "UL"
+		},
+		{
+			"name": "Variable",
+			"element": "Var"
+		},
+		{
+			"name": "Video",
+			"attributes": [
+				{
+					"name": "AutoPlay",
+					"type": "bool"
+				},
+				{
+					"name": "Controls",
+					"type": "bool"
+				},
+				{
+					"name": "ControlsList",
+					"type": "enum"
+				},
+				{
+					"name": "CrossOrigin",
+					"type": "enum"
+				},
+				{
+					"name": "DisablePictureInPicture",
+					"type": "bool"
+				},
+				{
+					"name": "DisableRemotePlayback",
+					"type": "bool"
+				},
+				{
+					"name": "Height",
+					"type": "number"
+				},
+				{
+					"name": "Loading",
+					"type": "enum"
+				},
+				{
+					"name": "Loop",
+					"type": "bool"
+				},
+				{
+					"name": "Muted",
+					"type": "bool"
+				},
+				{
+					"name": "PlaysInline",
+					"type": "bool"
+				},
+				{
+					"name": "Poster",
+					"type": "uri"
+				},
+				{
+					"name": "Preload",
+					"type": "enum"
+				},
+				{
+					"name": "Source",
+					"attribute": "Src",
+					"type": "uri"
+				}
+			]
+		},
+		{
+			"name": "BreakOpportunity",
+			"element": "wbr",
+			"void": true
+		}
+	]
+}

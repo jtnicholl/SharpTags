@@ -1,0 +1,35 @@
+# Libraries
+[Ll]ib/
+
+# Generated files
+*.g.*
+*.gen.*
+*.generated.*
+*.map
+*.map.*
+*.min.*
+
+# Developer-specific
+*.user
+*.local
+
+# Various build outputs
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+[Xx]64/
+[Xx]86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Bb]ld/
+[Bb]uild/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+[Ee]xports/
+[Ee]xport/
+[Ee]xported/
+[Tt]est[Rr]esults/

@@ -1,0 +1,56 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = tab
+tab_width = 4
+indent_size = 4
+trim_trailing_whitespace = true
+
+[*.cs]
+# CA1065: Do not raise exceptions in unexpected locations
+dotnet_diagnostic.CA1065.severity = warning
+# CA1823: Avoid unused private fields
+dotnet_diagnostic.CA1823.severity = warning
+# CA1825: Avoid zero-length array allocations
+dotnet_diagnostic.CA1825.severity = warning
+# CA1852: Seal internal types
+dotnet_diagnostic.CA1852.severity = warning
+dotnet_code_quality.CA1852.ignore_internalsvisibleto = true
+# CA2007: Do not directly await a Task
+dotnet_diagnostic.CA2007.severity = warning
+dotnet_code_quality.CA2007.output_kind = DynamicallyLinkedLibrary
+# IDE0005: Using directive is unnecessary
+dotnet_diagnostic.IDE0005.severity = warning
+# IDE0011: Add braces
+dotnet_diagnostic.IDE0011.severity = warning
+# IDE0130: Namespace does not match folder structure
+dotnet_diagnostic.IDE0130.severity = warning
+# IDE0161: Use file-scoped namespace
+dotnet_diagnostic.IDE0161.severity = warning
+# IDE0290: Use primary constructor
+dotnet_diagnostic.IDE0290.severity = none
+# IDE0300: Use collection expression for array
+dotnet_diagnostic.IDE0300.severity = warning
+
+dotnet_code_quality_unused_parameters = non_public:warning
+dotnet_style_prefer_collection_expression = when_types_exactly_match
+
+[SharpTags/Nodes/Html/Attributes/Values/*.cs]
+# CS1591: Missing XML comment for publicly visible type or member
+# TODO: Need to document everything, but want to stop the warning flood from the enums for now
+dotnet_diagnostic.CS1591.severity = suggestion
+
+# Ignore some of these for the example app
+[SharpTags.ExampleWebApp/**/*.cs]
+# CA1852: Seal internal types
+dotnet_diagnostic.CA1852.severity = none
+
+[{*.yml,*.yaml,*.md}]
+indent_style = space
+indent_size = 2
+
+[*.gen.*]
+generated_code = true
