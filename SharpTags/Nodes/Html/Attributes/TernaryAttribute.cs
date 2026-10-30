@@ -11,7 +11,7 @@ internal sealed class TernaryAttribute<TModel, TAttribute> : HtmlAttribute<TMode
 {
 	public TernaryAttributeValue<TModel> Value { get; }
 
-	protected override ReadOnlyMemory<byte> Name => throw new InvalidOperationException();
+	protected override ReadOnlyMemory<byte> Name => TAttribute.Name;
 
 	internal override bool RequiresModel => this.Value.Value is Delegate;
 

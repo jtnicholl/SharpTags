@@ -7,6 +7,8 @@ namespace SharpTags.Nodes.Html.Attributes;
 
 internal sealed class SpellCheckAttribute : ITernaryAttribute
 {
+	public static ReadOnlyMemory<byte> Name => AttributeNames.SpellCheck;
+
 	public static ReadOnlyMemory<byte> TrueValue { get; } = (byte[])
 	[
 		..AttributeNames.SpellCheck.Span,

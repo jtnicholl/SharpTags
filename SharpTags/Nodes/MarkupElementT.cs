@@ -126,7 +126,6 @@ public closed class MarkupElement<TModel> : MarkupNode<TModel>
 	{
 		ArgumentNullException.ThrowIfNull(utf8Buffer);
 		utf8Buffer.Write(MarkupElement.LessThan.Span);
-		utf8Buffer.Write(MarkupElement.LessThan.Span);
 		utf8Buffer.Write(this.name.Span);
 		foreach (var attribute in Attributes)
 		{

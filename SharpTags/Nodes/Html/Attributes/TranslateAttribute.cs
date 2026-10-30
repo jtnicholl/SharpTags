@@ -7,6 +7,8 @@ namespace SharpTags.Nodes.Html.Attributes;
 
 internal sealed class TranslateAttribute : ITernaryAttribute
 {
+	public static ReadOnlyMemory<byte> Name => AttributeNames.Translate;
+
 	public static ReadOnlyMemory<byte> TrueValue { get; } = (byte[])
 	[
 		..AttributeNames.Translate.Span,

@@ -7,6 +7,8 @@ namespace SharpTags.Nodes.Html.Attributes;
 
 internal sealed class AutoCompleteAttribute : ITernaryAttribute
 {
+	public static ReadOnlyMemory<byte> Name => AttributeNames.AutoComplete;
+
 	public static ReadOnlyMemory<byte> TrueValue { get; } = (byte[])
 	[
 		..AttributeNames.AutoComplete.Span,

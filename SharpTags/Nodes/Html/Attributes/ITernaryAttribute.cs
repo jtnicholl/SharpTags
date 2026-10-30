@@ -6,6 +6,7 @@ namespace SharpTags.Nodes.Html.Attributes;
 
 internal interface ITernaryAttribute
 {
+	static abstract ReadOnlyMemory<byte> Name { get; }
 	static abstract ReadOnlyMemory<byte> TrueValue { get; }
 	static abstract ReadOnlyMemory<byte> FalseValue { get; }
 

@@ -475,11 +475,5 @@ public readonly struct PlainText : IEquatable<PlainText>
 	/// </summary>
 	/// <param name="date">The date to convert.</param>
 	/// <returns>An escaped <see cref="PlainText" />.</returns>
-	public static implicit operator PlainText(DateOnly date)
-	{
-		var text = GC.AllocateUninitializedArray<byte>(10);
-		date.TryFormat(text, out var written, "O");
-		Contract.Assert(written == 10);
-		return new(text);
-	}
+	public static implicit operator PlainText(DateOnly date) => new(date);
 }

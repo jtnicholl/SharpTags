@@ -7,6 +7,8 @@ namespace SharpTags.Nodes.Html.Attributes;
 
 internal sealed class WritingSuggestionsAttribute : ITernaryAttribute
 {
+	public static ReadOnlyMemory<byte> Name => AttributeNames.WritingSuggestions;
+
 	public static ReadOnlyMemory<byte> TrueValue { get; } = AttributeNames.WritingSuggestions[..^2];
 
 	public static ReadOnlyMemory<byte> FalseValue { get; } = (byte[])

@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: LGPL-3.0-or-later
 
+using System.Buffers;
+using System.IO.Pipelines;
 using System.Text;
 using SharpTags.Nodes.Html.Elements;
 using SharpTags.UnitTests.TestModels;
@@ -10,6 +12,85 @@ namespace SharpTags.UnitTests.Nodes.Html;
 internal sealed class HtmlElementTests
 {
 	private static CancellationToken Cancel => TestContext.CurrentContext.CancellationToken;
+
+	private static IEnumerable<TestCaseData> NoModelRenderTestCases() =>
+	[
+		new(
+			new Div<object?>(new ContentSpan<object?>(), new ContentSpan<object?>()),
+			"<div><span></span><span></span></div>"
+		),
+		new(
+			new Div<object?>(),
+			"<div></div>"
+		),
+		new(
+			new Break<object?>(),
+			"<br/>"
+		),
+		new(
+			new Div<object?>
+			{
+				Id = "id",
+			},
+			"<div id=\"id\"></div>"
+		),
+		new(
+			new Div<object?>
+			{
+				TabIndex = 1,
+			},
+			"<div tabindex=\"1\"></div>"
+		),
+		new(
+			new Div<object?>
+			{
+				AccessKey = 'C',
+			},
+			"<div accesskey=\"C\"></div>"
+		),
+		new(
+			new Div<object?>
+			{
+				AutoFocus = true,
+			},
+			"<div autofocus></div>"
+		),
+		new(
+			new Div<object?>
+			{
+				AutoFocus = false,
+			},
+			"<div></div>"
+		),
+		new(
+			new Div<object?>
+			{
+				Draggable = true,
+			},
+			"<div draggable=\"true\"></div>"
+		),
+		new(
+			new Div<object?>
+			{
+				Draggable = false,
+			},
+			"<div draggable=\"false\"></div>"
+		),
+		new(
+			new Inserted<object?>
+			{
+				DateTime = new DateOnly(2026, 1, 1),
+			},
+			"<ins datetime=\"2026-01-01\"></ins>"
+		),
+		new(
+			new Inserted<object?>
+			{
+				DateTime = new DateTime(2026, 1, 1),
+			},
+			"<ins datetime=\"2026-01-01T00:00\"></ins>"
+		),
+	];
 
 	[Test]
 	public void RequiresModel_NodeWithModelAttribute_IsTrue()
@@ -49,146 +130,36 @@ internal sealed class HtmlElementTests
 		Assert.That(node.RequiresModel, Is.False);
 	}
 
-	[Test]
-	public async Task Render_ElementWithChildren_IncludesChildren()
+	[TestCaseSource(nameof(NoModelRenderTestCases))]
+	public async Task RenderStream(HtmlElement<object?> node, string expected)
 	{
-		var node = new Div<object?>(new ContentSpan<object?>(), new ContentSpan<object?>());
+		await using MemoryStream memStream = new();
 
-		string result;
-		await using (var stream = new MemoryStream())
-		{
-			await node.Render(stream, null, Cancel);
-			result = Encoding.UTF8.GetString(stream.ToArray());
-		}
+		await node.Render(memStream, null, Cancel);
+		var result = Encoding.UTF8.GetString(memStream.ToArray());
 
-		const string expected = "<div><span></span><span></span></div>";
 		Assert.That(result, Is.EqualTo(expected));
 	}
 
-	[Test]
-	public async Task Render_NonVoidElementNoChildren_HasClosingTag()
+	[TestCaseSource(nameof(NoModelRenderTestCases))]
+	public async Task RenderPipeWriter(HtmlElement<object?> node, string expected)
 	{
-		var node = new Div<object?>();
+		await using MemoryStream memStream = new();
 
-		string result;
-		await using (var stream = new MemoryStream())
-		{
-			await node.Render(stream, null, Cancel);
-			result = Encoding.UTF8.GetString(stream.ToArray());
-		}
+		await node.Render(PipeWriter.Create(memStream), null, Cancel);
+		var result = Encoding.UTF8.GetString(memStream.ToArray());
 
-		const string expected = "<div></div>";
 		Assert.That(result, Is.EqualTo(expected));
 	}
 
-	[Test]
-	public async Task Render_VoidElement_IsSelfClosing()
+	[TestCaseSource(nameof(NoModelRenderTestCases))]
+	public void RenderBufferWriter(HtmlElement<object?> node, string expected)
 	{
-		var node = new Break<object?>();
+		ArrayBufferWriter<byte> buffer = new();
 
-		string result;
-		await using (var stream = new MemoryStream())
-		{
-			await node.Render(stream, null, Cancel);
-			result = Encoding.UTF8.GetString(stream.ToArray());
-		}
+		node.Render(buffer, null);
+		var result = Encoding.UTF8.GetString(buffer.WrittenSpan);
 
-		const string expected = "<br/>";
-		Assert.That(result, Is.EqualTo(expected));
-	}
-
-	[Test]
-	public async Task Render_WithStringAttribute_IncludesAttribute()
-	{
-		var node = new Div<object?>
-		{
-			Id = "id",
-		};
-
-		string result;
-		await using (var stream = new MemoryStream())
-		{
-			await node.Render(stream, null, Cancel);
-			result = Encoding.UTF8.GetString(stream.ToArray());
-		}
-
-		const string expected = "<div id=\"id\"></div>";
-		Assert.That(result, Is.EqualTo(expected));
-	}
-
-	[Test]
-	public async Task Render_WithIntegerAttribute_IncludesAttribute()
-	{
-		var node = new Div<object?>
-		{
-			TabIndex = 1,
-		};
-
-		string result;
-		await using (var stream = new MemoryStream())
-		{
-			await node.Render(stream, null, Cancel);
-			result = Encoding.UTF8.GetString(stream.ToArray());
-		}
-
-		const string expected = "<div tabindex=\"1\"></div>";
-		Assert.That(result, Is.EqualTo(expected));
-	}
-
-	[Test]
-	public async Task Render_WithCharAttribute_IncludesAttribute()
-	{
-		var node = new Div<object?>
-		{
-			AccessKey = 'C',
-		};
-
-		string result;
-		await using (var stream = new MemoryStream())
-		{
-			await node.Render(stream, null, Cancel);
-			result = Encoding.UTF8.GetString(stream.ToArray());
-		}
-
-		const string expected = "<div accesskey=\"C\"></div>";
-		Assert.That(result, Is.EqualTo(expected));
-	}
-
-	[Test]
-	public async Task Render_WithBooleanAttributeTrue_IncludesAttribute()
-	{
-		var node = new Div<object?>
-		{
-			AutoFocus = true,
-		};
-
-		string result;
-		await using (var stream = new MemoryStream())
-		{
-			await node.Render(stream, null, Cancel);
-			result = Encoding.UTF8.GetString(stream.ToArray());
-		}
-
-		const string expected = "<div autofocus></div>";
-		Assert.That(result, Is.EqualTo(expected));
-	}
-
-	[Test]
-	public async Task Render_WithBooleanAttributeFalse_ExcludesAttribute()
-	{
-		var node = new Div<object?>
-		{
-			AutoFocus = false,
-		};
-
-		string result;
-		await using (var stream = new MemoryStream())
-		{
-			await node.Render(stream, null, Cancel);
-			result = Encoding.UTF8.GetString(stream.ToArray());
-		}
-
-		const string expected = "<div></div>";
 		Assert.That(result, Is.EqualTo(expected));
 	}
 }

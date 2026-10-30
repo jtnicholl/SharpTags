@@ -234,6 +234,99 @@ internal sealed class PlainTextTests
 	}
 
 	[Test]
+	public void FormattableConstructor_FromGuid_Formats()
+	{
+		var uuid = Guid.NewGuid();
+		PlainText text = new(uuid);
+
+		using var _ = Assert.EnterMultipleScope();
+		Assert.That(text.ToString(), Is.EqualTo(uuid.ToString()));
+		Assert.That(text.ByteLength, Is.EqualTo(36));
+	}
+
+	[Test]
+	public void Join_EmptyEnumerable_ReturnsEmpty()
+	{
+		var text = PlainText.Join(" "u8, Enumerable.Empty<PlainText>());
+
+		Assert.That(text.IsEmpty);
+	}
+
+	[Test]
+	public void Join_OneItemEnumerable_ReturnsSameReference()
+	{
+		PlainText text = "test text"u8;
+
+		var joined = PlainText.Join(" "u8, new List<PlainText> { text });
+
+		Assert.That(joined, Is.EqualTo(text));
+		Assert.That(joined.Utf8Bytes, Is.EqualTo(text.Utf8Bytes), "References should be equal");
+	}
+
+	[Test]
+	public void Join_TwoItemEnumerable_Joins()
+	{
+		PlainText text = "test text"u8;
+		PlainText expected = "test text test text"u8;
+
+		var actual = PlainText.Join(" "u8, Enumerable.Repeat(text, 2));
+
+		Assert.That(actual, Is.EqualTo(expected));
+	}
+
+	[Test]
+	public void Join_ThreeItemEnumerable_Joins()
+	{
+		PlainText text = "test text"u8;
+		PlainText expected = "test text,test text,test text"u8;
+
+		var actual = PlainText.Join(","u8, Enumerable.Repeat(text, 3));
+
+		Assert.That(actual, Is.EqualTo(expected));
+	}
+
+	[Test]
+	public void Join_EmptySpan_ReturnsEmpty()
+	{
+		var text = PlainText.Join(" "u8);
+
+		Assert.That(text.IsEmpty);
+	}
+
+	[Test]
+	public void Join_OneItemSpan_ReturnsSameReference()
+	{
+		PlainText text = "test text"u8;
+
+		var joined = PlainText.Join(" "u8, text);
+
+		Assert.That(joined, Is.EqualTo(text));
+		Assert.That(joined.Utf8Bytes, Is.EqualTo(text.Utf8Bytes), "References should be equal");
+	}
+
+	[Test]
+	public void Join_TwoItemSpan_Joins()
+	{
+		PlainText text = "test text"u8;
+		PlainText expected = "test text test text"u8;
+
+		var actual = PlainText.Join(" "u8, text, text);
+
+		Assert.That(actual, Is.EqualTo(expected));
+	}
+
+	[Test]
+	public void Join_ThreeItemSpan_Joins()
+	{
+		PlainText text = "test text"u8;
+		PlainText expected = "test text,test text,test text"u8;
+
+		var actual = PlainText.Join(","u8, text, text, text);
+
+		Assert.That(actual, Is.EqualTo(expected));
+	}
+
+	[Test]
 	public void ImplicitConversion_FromString_Escapes()
 	{
 		PlainText text = "UnsafeString&<>\"";

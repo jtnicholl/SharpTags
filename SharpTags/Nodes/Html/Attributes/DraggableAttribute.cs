@@ -7,6 +7,8 @@ namespace SharpTags.Nodes.Html.Attributes;
 
 internal sealed class DraggableAttribute : ITernaryAttribute
 {
+	public static ReadOnlyMemory<byte> Name => AttributeNames.Draggable;
+
 	public static ReadOnlyMemory<byte> TrueValue { get; } = (byte[])
 	[
 		..AttributeNames.Draggable.Span,

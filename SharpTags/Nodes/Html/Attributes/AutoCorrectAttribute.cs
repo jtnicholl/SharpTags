@@ -7,6 +7,8 @@ namespace SharpTags.Nodes.Html.Attributes;
 
 internal sealed class AutoCorrectAttribute : ITernaryAttribute
 {
+	public static ReadOnlyMemory<byte> Name => AttributeNames.AutoCorrect;
+
 	public static ReadOnlyMemory<byte> TrueValue { get; } = (byte[])[
 		..AttributeNames.AutoCorrect.Span,
 		(byte)'"',

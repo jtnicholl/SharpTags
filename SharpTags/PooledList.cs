@@ -122,10 +122,10 @@ internal sealed class PooledList<T> : IList<T>, IReadOnlyList<T>, IDisposable
 
 	public PooledList(int initialCapacity = 16) : this(ArrayPool<T>.Shared, initialCapacity) { }
 
-	public PooledList(ArrayPool<T> from, IEnumerable<T> collection)
+	public PooledList(ArrayPool<T> from, IEnumerable<T> enumerable)
 	{
 		this.arrayPool = from;
-		if (collection.TryGetNonEnumeratedCount(out var count))
+		if (enumerable.TryGetNonEnumeratedCount(out var count))
 		{
 			if (count == 0)
 			{
@@ -140,16 +140,17 @@ internal sealed class PooledList<T> : IList<T>, IReadOnlyList<T>, IDisposable
 			this.array = this.arrayPool.Rent(16);
 		}
 
-		AddRange(collection);
+		AddRange(enumerable);
 	}
 
-	public PooledList(IEnumerable<T> collection) : this(ArrayPool<T>.Shared, collection) { }
+	public PooledList(IEnumerable<T> enumerable) : this(ArrayPool<T>.Shared, enumerable) { }
 
 	public PooledList(ArrayPool<T> from, params ReadOnlySpan<T> span)
 	{
 		this.arrayPool = from;
 		this.array = span.IsEmpty ? [] : this.arrayPool.Rent(span.Length);
 		span.CopyTo(this.array);
+		Count = span.Length;
 	}
 
 	public PooledList(params ReadOnlySpan<T> span) : this(ArrayPool<T>.Shared, span) { }
@@ -172,13 +173,7 @@ internal sealed class PooledList<T> : IList<T>, IReadOnlyList<T>, IDisposable
 	public void Add(T item)
 	{
 		ObjectDisposedException.ThrowIf(Disposed, this);
-		if (Capacity == Count)
-		{
-			var newArray = this.arrayPool.Rent(Capacity * 2);
-			Array.Copy(this.array, newArray, Count);
-			ReturnCleared();
-			this.array = newArray;
-		}
+		EnsureCapacity(Count + 1);
 		this.array[Count++] = item;
 	}
 
@@ -275,14 +270,7 @@ internal sealed class PooledList<T> : IList<T>, IReadOnlyList<T>, IDisposable
 	public void AddRange(params ReadOnlySpan<T> items)
 	{
 		int size = Count + items.Length;
-		if (size > Capacity)
-		{
-			var newArray = this.arrayPool.Rent(size * 2);
-			this.array.AsSpan(0, Count).CopyTo(newArray);
-			ReturnCleared();
-			this.array = newArray;
-		}
-
+		EnsureCapacity(size);
 		items.CopyTo(this.array.AsSpan(Count));
 		Count = size;
 	}
@@ -296,10 +284,7 @@ internal sealed class PooledList<T> : IList<T>, IReadOnlyList<T>, IDisposable
 		ObjectDisposedException.ThrowIf(Disposed, this);
 		if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
 		{
-			for (int i = 0; i < Count; i++)
-			{
-				this.array[i] = default!;
-			}
+			Array.Clear(this.array, 0, Count);
 		}
 		Count = 0;
 	}
