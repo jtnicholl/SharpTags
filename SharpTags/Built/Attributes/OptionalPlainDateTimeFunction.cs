@@ -2,7 +2,7 @@
 
 namespace SharpTags.Built.Attributes;
 
-internal union OptionalPlainDateTimeFunction<TModel>(
+internal readonly union OptionalPlainDateTimeFunction<TModel>(
 	Func<TModel, DateTime?>,
 	Func<TModel, DateOnly?>
 );

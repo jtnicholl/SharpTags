@@ -6,7 +6,7 @@ namespace SharpTags.Nodes.Html.Attributes.Values;
 /// Union of possible values for an HTML attribute which can be true, false, or entirely absent.
 /// </summary>
 /// <typeparam name="TModel">The type of model, which can vary value.</typeparam>
-public union TernaryAttributeValue<TModel>(
+public readonly union TernaryAttributeValue<TModel>(
 	bool,
 	Func<TModel, bool?>,
 	Func<TModel, bool>
@@ -18,7 +18,7 @@ public union TernaryAttributeValue<TModel>(
 	/// </summary>
 	/// <param name="value">The <typeparamref name="TModel" /> to evaluate.</param>
 	/// <returns>The value of this <see cref="TernaryAttributeValue{TModel}" />.</returns>
-	public readonly bool? Evaluate(TModel value)
+	public bool? Evaluate(TModel value)
 	{
 		return this switch
 		{
@@ -27,5 +27,14 @@ public union TernaryAttributeValue<TModel>(
 			Func<TModel, bool> f => f.Invoke(value),
 			null => null,
 		};
+	}
+
+	/// <summary>
+	/// Implicitly convert a <see langword="bool?" /> to a
+	/// <see cref="TernaryAttributeValue{TModel}" />.
+	/// </summary>
+	public static implicit operator TernaryAttributeValue<TModel>(bool? value)
+	{
+		return value ?? default(TernaryAttributeValue<TModel>);
 	}
 }

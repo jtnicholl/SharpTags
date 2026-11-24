@@ -6,7 +6,7 @@ namespace SharpTags.Nodes.Html.Attributes.Values;
 /// Union of possible values for an integer HTML attribute.
 /// </summary>
 /// <typeparam name="TModel">The type of model, which can vary value.</typeparam>
-public union IntegerAttributeValue<TModel>(
+public readonly union IntegerAttributeValue<TModel>(
 	int,
 	Func<TModel, int>,
 	Func<TModel, int?>
@@ -18,7 +18,7 @@ public union IntegerAttributeValue<TModel>(
 	/// </summary>
 	/// <param name="value">The <typeparamref name="TModel" /> to evaluate.</param>
 	/// <returns>The value of this <see cref="IntegerAttributeValue{TModel}" />.</returns>
-	public readonly int? Evaluate(TModel value)
+	public int? Evaluate(TModel value)
 	{
 		return this switch
 		{

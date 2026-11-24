@@ -114,19 +114,16 @@ internal readonly struct AttributeResult : IEquatable<AttributeResult>
 		Result = result;
 	}
 
-	[Pure]
 	public bool Equals(AttributeResult other)
 	{
 		return Result == other.Result && Value.Span.SequenceEqual(other.Value.Span);
 	}
 
-	[Pure]
 	public override bool Equals([NotNullWhen(true)] object? obj)
 	{
 		return obj is AttributeResult other && Equals(other);
 	}
 
-	[Pure]
 	public override int GetHashCode()
 	{
 		HashCode output = new();

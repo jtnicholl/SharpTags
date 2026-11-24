@@ -39,6 +39,9 @@ internal sealed class ListAttribute<TModel> : HtmlAttribute<TModel>
 		return Value switch
 		{
 			PlainText pt => [Name, pt.Utf8Bytes, Name[^1..]],
+			IEnumerable<PlainText> ie => [Name, ..ie.Select(t => t.Utf8Bytes), Name[^1..]],
+			IEnumerable<string> ie =>
+				[Name, ..ie.Select(s => new PlainText(s).Utf8Bytes), Name[^1..]],
 			Func<TModel, PlainText> f => [Name, new BuiltText<TModel>(f), Name[^1..]],
 			Func<TModel, PlainText?> f => [new BuiltStringAttribute<TModel>(Name, f)],
 			Func<TModel, IEnumerable<PlainText>?> f =>

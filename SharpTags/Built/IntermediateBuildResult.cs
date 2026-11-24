@@ -1,15 +1,15 @@
-using System.Diagnostics.Contracts;
+// SPDX-License-Identifier: LGPL-3.0-or-later
 
 namespace SharpTags.Built;
 
-internal union IntermediateBuildResult<TModel>(
+internal readonly union IntermediateBuildResult<TModel>(
 	Range,
 	IBuiltSegment<TModel>,
 	SkipCondition<TModel>,
 	BuiltEnumerator<TModel>
 ) : IEquatable<IntermediateBuildResult<TModel>>
 {
-	public readonly BuiltMarkupSegment<TModel> Build(ReadOnlyMemory<byte> finalBuffer)
+	public BuiltMarkupSegment<TModel> Build(ReadOnlyMemory<byte> finalBuffer)
 	{
 		return this switch
 		{
@@ -21,7 +21,7 @@ internal union IntermediateBuildResult<TModel>(
 		};
 	}
 
-	public readonly bool Equals(IntermediateBuildResult<TModel> other)
+	public bool Equals(IntermediateBuildResult<TModel> other)
 	{
 		return this switch
 		{
@@ -33,13 +33,12 @@ internal union IntermediateBuildResult<TModel>(
 		};
 	}
 
-	public readonly override bool Equals(object? obj)
+	public override bool Equals(object? obj)
 	{
 		return (obj is IntermediateBuildResult<TModel> other && Equals(other)) ||
 			(obj is null && this is null);
 	}
 
-	[Pure]
 	public override int GetHashCode()
 	{
 		return Value?.GetHashCode() ?? 0;

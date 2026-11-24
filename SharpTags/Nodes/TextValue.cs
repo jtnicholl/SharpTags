@@ -8,7 +8,7 @@ namespace SharpTags.Nodes;
 /// <typeparam name="TModel">
 /// The type of model, which can be used to vary rendered output.
 /// </typeparam>
-public union TextValue<TModel>(
+public readonly union TextValue<TModel>(
 	PlainText,
 	Func<TModel, PlainText>,
 	Func<TModel, string?>
@@ -19,7 +19,7 @@ public union TextValue<TModel>(
 	/// </summary>
 	/// <param name="model">The <typeparamref name="TModel" /> to vary the text based on.</param>
 	/// <returns>The <see cref="PlainText" />.</returns>
-	public readonly PlainText Evaluate(TModel model)
+	public PlainText Evaluate(TModel model)
 	{
 		return this switch
 		{

@@ -6,7 +6,7 @@ namespace SharpTags.Nodes.Html.Attributes.Values;
 /// Union of possible values for a string HTML attribute.
 /// </summary>
 /// <typeparam name="TModel">The type of model, which can vary value.</typeparam>
-public union StringAttributeValue<TModel>(
+public readonly union StringAttributeValue<TModel>(
 	PlainText,
 	Func<TModel, PlainText>,
 	Func<TModel, PlainText?>,
@@ -19,7 +19,7 @@ public union StringAttributeValue<TModel>(
 	/// </summary>
 	/// <param name="value">The <typeparamref name="TModel" /> to evaluate.</param>
 	/// <returns>The value of this <see cref="StringAttributeValue{TModel}" />.</returns>
-	public readonly PlainText? Evaluate(TModel value)
+	public PlainText? Evaluate(TModel value)
 	{
 		return this switch
 		{
@@ -46,5 +46,14 @@ public union StringAttributeValue<TModel>(
 	public static implicit operator StringAttributeValue<TModel>(ReadOnlySpan<byte> value)
 	{
 		return new PlainText(value);
+	}
+
+	/// <summary>
+	/// Implicitly convert a nullable <see cref="PlainText" /> to a
+	/// <see cref="StringAttributeValue{TModel}" />.
+	/// </summary>
+	public static implicit operator StringAttributeValue<TModel>(PlainText? value)
+	{
+		return value ?? default(StringAttributeValue<TModel>);
 	}
 }

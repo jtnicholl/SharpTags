@@ -62,7 +62,7 @@ partial class HtmlElement<TModel> : MarkupElement<TModel>
 		{
 			yield return MarkupElement.GreaterThan;
 
-			foreach (var child in this.Children)
+			foreach (var child in Children)
 			{
 				foreach (var result in child.Build(cache, recursionCheck, capContext))
 				{

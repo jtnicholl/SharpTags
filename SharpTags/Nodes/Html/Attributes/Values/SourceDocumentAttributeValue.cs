@@ -8,7 +8,7 @@ namespace SharpTags.Nodes.Html.Attributes.Values;
 /// Not yet implemented. Do not use.
 /// </summary>
 [Experimental("STAGS_001")]
-public union SourceDocumentAttributeValue<TModel>(
+public readonly union SourceDocumentAttributeValue<TModel>(
 	PlainText,
 	Func<TModel, PlainText>
 );

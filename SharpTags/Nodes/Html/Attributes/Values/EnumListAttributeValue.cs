@@ -7,7 +7,7 @@ namespace SharpTags.Nodes.Html.Attributes.Values;
 /// </summary>
 /// <typeparam name="TModel">The type of model, which can vary the value.</typeparam>
 /// <typeparam name="TEnum">The type of enum.</typeparam>
-public union EnumListAttributeValue<TModel, TEnum>(
+public readonly union EnumListAttributeValue<TModel, TEnum>(
 	TEnum,
 	IEnumerable<TEnum>,
 	Func<TModel, TEnum>,
@@ -21,15 +21,25 @@ public union EnumListAttributeValue<TModel, TEnum>(
 	/// </summary>
 	/// <param name="value">The <typeparamref name="TModel" /> to evaluate.</param>
 	/// <returns>The value of this <see cref="EnumListAttributeValue{TModel, TEnum}" />.</returns>
-	public readonly IEnumerable<TEnum>? Evaluate(TModel value)
+	public IEnumerable<TEnum>? Evaluate(TModel value)
 	{
 		return this switch
 		{
-			TEnum e => Enum.IsDefined(e) && !e.Equals(default(TEnum)) ? [e] : null,
+			TEnum e => !e.Equals(default(TEnum)) ? [e] : null,
 			IEnumerable<TEnum> e => e,
-			Func<TModel, TEnum> f => [f.Invoke(value)],
+			Func<TModel, TEnum> f =>
+				f.Invoke(value) is var e && !e.Equals(default(TEnum)) ? [e] : null,
 			Func<TModel, IEnumerable<TEnum>?> f => f.Invoke(value),
 			null => null,
 		};
+	}
+
+	/// <summary>
+	/// Implicitly convert a nullable <typeparamref name="TEnum" /> to a
+	/// <see cref="EnumAttributeValue{TModel, TValue}" />.
+	/// </summary>
+	public static implicit operator EnumListAttributeValue<TModel, TEnum>(TEnum? value)
+	{
+		return value ?? default(EnumListAttributeValue<TModel, TEnum>);
 	}
 }

@@ -2,7 +2,7 @@
 
 namespace SharpTags.Built.Attributes;
 
-internal union ListFunction<TModel>(
+internal readonly union ListFunction<TModel>(
 	Func<TModel, IEnumerable<PlainText>?>,
 	Func<TModel, IEnumerable<string>?>
 );

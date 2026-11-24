@@ -2,7 +2,7 @@
 
 namespace SharpTags.Built.Attributes;
 
-internal union TernaryPredicate<TModel>(
+internal readonly union TernaryPredicate<TModel>(
 	Func<TModel, bool?>,
 	Func<TModel, bool>
 );

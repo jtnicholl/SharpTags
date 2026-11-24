@@ -5,8 +5,10 @@ namespace SharpTags.Nodes.Html.Attributes.Values;
 /// <summary>
 /// Union type for lists of text strings.
 /// </summary>
-public union ListAttributeValue<TModel>(
+public readonly union ListAttributeValue<TModel>(
 	PlainText,
+	IEnumerable<PlainText>,
+	IEnumerable<string>,
 	Func<TModel, PlainText>,
 	Func<TModel, PlainText?>,
 	Func<TModel, IEnumerable<PlainText>?>,
@@ -20,11 +22,13 @@ public union ListAttributeValue<TModel>(
 	/// </summary>
 	/// <param name="value">The <typeparamref name="TModel" /> to evaluate.</param>
 	/// <returns>The value of this <see cref="ListAttributeValue{TModel}" />.</returns>
-	public readonly IEnumerable<PlainText>? Evaluate(TModel value)
+	public IEnumerable<PlainText>? Evaluate(TModel value)
 	{
 		return this switch
 		{
 			PlainText pt => [pt],
+			IEnumerable<PlainText> ie => ie,
+			IEnumerable<string> ie => ie.Select(s => new PlainText(s)),
 			Func<TModel, PlainText> f => [f.Invoke(value)],
 			Func<TModel, PlainText?> f => f.Invoke(value) is PlainText t ? [t] : null,
 			Func<TModel, IEnumerable<PlainText>?> f => f.Invoke(value),
@@ -49,5 +53,14 @@ public union ListAttributeValue<TModel>(
 	public static implicit operator ListAttributeValue<TModel>(ReadOnlySpan<byte> value)
 	{
 		return new PlainText(value);
+	}
+
+	/// <summary>
+	/// Implicitly convert a nullable <see cref="PlainText" /> to a
+	/// <see cref="ListAttributeValue{TModel}" />.
+	/// </summary>
+	public static implicit operator ListAttributeValue<TModel>(PlainText? value)
+	{
+		return value ?? default(ListAttributeValue<TModel>);
 	}
 }

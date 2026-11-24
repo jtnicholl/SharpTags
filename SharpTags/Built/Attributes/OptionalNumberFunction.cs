@@ -2,7 +2,7 @@
 
 namespace SharpTags.Built.Attributes;
 
-internal union OptionalNumberFunction<TModel>(
+internal readonly union OptionalNumberFunction<TModel>(
 	Func<TModel, int?>,
 	Func<TModel, double?>
 );

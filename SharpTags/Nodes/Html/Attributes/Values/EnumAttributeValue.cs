@@ -7,7 +7,7 @@ namespace SharpTags.Nodes.Html.Attributes.Values;
 /// </summary>
 /// <typeparam name="TModel">The type of model, which can vary the value.</typeparam>
 /// <typeparam name="TEnum">The type of enum.</typeparam>
-public union EnumAttributeValue<TModel, TEnum>(
+public readonly union EnumAttributeValue<TModel, TEnum>(
 	TEnum,
 	Func<TModel, TEnum>
 ) where TEnum : struct, Enum
@@ -18,7 +18,7 @@ public union EnumAttributeValue<TModel, TEnum>(
 	/// </summary>
 	/// <param name="value">The <typeparamref name="TModel" /> to evaluate.</param>
 	/// <returns>The value of this <see cref="EnumAttributeValue{TModel, TValue}" />.</returns>
-	public readonly TEnum Evaluate(TModel value)
+	public TEnum Evaluate(TModel value)
 	{
 		return this switch
 		{
@@ -26,5 +26,14 @@ public union EnumAttributeValue<TModel, TEnum>(
 			Func<TModel, TEnum> f => f.Invoke(value),
 			null => default,
 		};
+	}
+
+	/// <summary>
+	/// Implicitly convert a nullable <typeparamref name="TEnum" /> to a
+	/// <see cref="EnumAttributeValue{TModel, TValue}" />.
+	/// </summary>
+	public static implicit operator EnumAttributeValue<TModel, TEnum>(TEnum? value)
+	{
+		return value ?? default(EnumAttributeValue<TModel, TEnum>);
 	}
 }

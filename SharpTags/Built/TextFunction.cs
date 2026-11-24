@@ -2,7 +2,7 @@
 
 namespace SharpTags.Built;
 
-internal union TextFunction<TModel>(
+internal readonly union TextFunction<TModel>(
 	Func<TModel, PlainText>,
 	Func<TModel, string?>
 );

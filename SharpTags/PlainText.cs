@@ -392,21 +392,18 @@ public readonly struct PlainText : IEquatable<PlainText>
 	/// <returns>
 	/// <see langword="true" /> it they are equal, <see langword="false" /> otherwise.
 	/// </returns>
-	[Pure]
 	public bool Equals(PlainText other)
 	{
 		return Utf8Bytes.Span.SequenceEqual(other.Utf8Bytes.Span);
 	}
 
 	/// <inheritdoc />
-	[Pure]
 	public override bool Equals([NotNullWhen(true)] object? obj)
 	{
 		return obj is PlainText other && Equals(other);
 	}
 
 	/// <inheritdoc />
-	[Pure]
 	public override int GetHashCode()
 	{
 		HashCode output = new();
@@ -420,7 +417,6 @@ public readonly struct PlainText : IEquatable<PlainText>
 	/// Convert the text back to a <see cref="string" />. Any text escaping will not be undone.
 	/// </summary>
 	/// <returns>The text as a <see cref="string" />.</returns>
-	[Pure]
 	public override string ToString()
 	{
 		return Encoding.UTF8.GetString(Utf8Bytes.Span);

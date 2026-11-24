@@ -6,7 +6,7 @@ namespace SharpTags.Nodes.Html.Attributes.Values;
 /// Union of possible values for a boolean HTML attribute.
 /// </summary>
 /// <typeparam name="TModel">The type of model, which can vary the value.</typeparam>
-public union BooleanAttributeValue<TModel>(
+public readonly union BooleanAttributeValue<TModel>(
 	bool,
 	Func<TModel, bool>
 )
@@ -17,7 +17,7 @@ public union BooleanAttributeValue<TModel>(
 	/// </summary>
 	/// <param name="value">The <typeparamref name="TModel" /> to evaluate.</param>
 	/// <returns>The value of this <see cref="BooleanAttributeValue{TModel}" />.</returns>
-	public readonly bool Evaluate(TModel value)
+	public bool Evaluate(TModel value)
 	{
 		return this switch
 		{
