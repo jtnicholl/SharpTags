@@ -44,7 +44,7 @@ public sealed class TernaryNode<TModel> : MarkupNode<TModel>
 	{
 		foreach (var node in Evaluate(model))
 		{
-			await node.Render(utf8Stream, model, cancel).ConfigureAwait(false);
+			await node.RenderAsync(utf8Stream, model, cancel).ConfigureAwait(false);
 		}
 	}
 
@@ -56,7 +56,7 @@ public sealed class TernaryNode<TModel> : MarkupNode<TModel>
 	{
 		foreach (var node in Evaluate(model))
 		{
-			await node.Render(utf8Pipe, model, cancel).ConfigureAwait(false);
+			await node.RenderAsync(utf8Pipe, model, cancel).ConfigureAwait(false);
 		}
 	}
 
@@ -88,7 +88,7 @@ public sealed class TernaryNode<TModel> : MarkupNode<TModel>
 			var startCount = buffer.Count;
 			if (startCount != 0)
 			{
-				buffer.Add(new SkipCondition<TModel>(default, 0, startCount));
+				buffer.Add(new SkipCondition<TModel>(null, 0, startCount));
 			}
 
 			for (int j = this.children[i].Length - 1; j >= 0; j--)

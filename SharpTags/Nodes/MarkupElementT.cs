@@ -93,7 +93,7 @@ public closed class MarkupElement<TModel> : MarkupNode<TModel>
 
 			foreach (var child in Children)
 			{
-				await child.Render(utf8Pipe, model, cancel).ConfigureAwait(false);
+				await child.RenderAsync(utf8Pipe, model, cancel).ConfigureAwait(false);
 			}
 
 			await utf8Pipe.WriteAsync(MarkupElement.LessThan, cancel).ConfigureAwait(false);

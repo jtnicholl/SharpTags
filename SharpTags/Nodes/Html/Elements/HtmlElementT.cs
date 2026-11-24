@@ -7,7 +7,7 @@ using SharpTags.Nodes.Html.Attributes;
 namespace SharpTags.Nodes.Html.Elements;
 
 /// <summary>
-/// Base class for all HTML elements.
+/// Base class for all model-based HTML elements.
 /// </summary>
 /// <typeparam name="TModel">
 /// The type of model, which can be used to vary rendered output.

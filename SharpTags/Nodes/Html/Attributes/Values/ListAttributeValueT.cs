@@ -39,7 +39,7 @@ public readonly union ListAttributeValue<TModel>(
 	}
 
 	/// <summary>
-	/// Implicitly convert a <see cref="string" /> to a <see cref="StringAttributeValue{TModel}" />.
+	/// Implicitly convert a <see cref="string" /> to a <see cref="ListAttributeValue{TModel}" />.
 	/// </summary>
 	public static implicit operator ListAttributeValue<TModel>(string? value)
 	{
@@ -48,7 +48,7 @@ public readonly union ListAttributeValue<TModel>(
 
 	/// <summary>
 	/// Implicitly convert a <see cref="ReadOnlySpan{T}" /> to a
-	/// <see cref="StringAttributeValue{TModel}" />.
+	/// <see cref="ListAttributeValue{TModel}" />.
 	/// </summary>
 	public static implicit operator ListAttributeValue<TModel>(ReadOnlySpan<byte> value)
 	{
@@ -62,5 +62,20 @@ public readonly union ListAttributeValue<TModel>(
 	public static implicit operator ListAttributeValue<TModel>(PlainText? value)
 	{
 		return value is PlainText pt ? new(pt) : default;
+	}
+
+	/// <summary>
+	/// Implicitly convert a <see cref="ListAttributeValue" /> to a
+	/// <see cref="ListAttributeValue{TModel}" />.
+	/// </summary>
+	public static implicit operator ListAttributeValue<TModel>(ListAttributeValue value)
+	{
+		return value switch
+		{
+			PlainText pt => new(pt),
+			IEnumerable<PlainText> ie => new(ie),
+			IEnumerable<string> ie => new(ie),
+			null => default,
+		};
 	}
 }

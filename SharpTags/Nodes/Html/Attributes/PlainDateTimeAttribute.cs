@@ -33,14 +33,14 @@ internal sealed class PlainDateTimeAttribute<TModel> : HtmlAttribute<TModel>
 				: [
 					AttributeNames.DateTime,
 					new PlainText(d).Utf8Bytes,
-					AttributeNames.DateTime[^1..]
+					AttributeNames.DateTime[^1..],
 				],
 			DateTime dt => dt == default
 				? []
 				: [
 					AttributeNames.DateTime,
 					new PlainText(dt).Utf8Bytes,
-					AttributeNames.DateTime[^1..]
+					AttributeNames.DateTime[^1..],
 				],
 			Func<TModel, DateTime?> f => [new BuiltOptionalPlainDateTimeAttribute<TModel>(f)],
 			Func<TModel, DateOnly?> f => [new BuiltOptionalPlainDateTimeAttribute<TModel>(f)],

@@ -28,4 +28,13 @@ public readonly union IntegerAttributeValue<TModel>(
 			null => null,
 		};
 	}
+
+	/// <summary>
+	/// Implicitly convert a nullable <see langword="int" /> to a
+	/// <see cref="IntegerAttributeValue{TModel}" />.
+	/// </summary>
+	public static implicit operator IntegerAttributeValue<TModel>(int? value)
+	{
+		return value is int i ? new(i) : default;
+	}
 }

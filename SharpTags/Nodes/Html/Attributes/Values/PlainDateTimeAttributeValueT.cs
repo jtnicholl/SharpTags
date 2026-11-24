@@ -35,4 +35,19 @@ public readonly union PlainDateTimeAttributeValue<TModel>(
 			null => null,
 		};
 	}
+
+	/// <summary>
+	/// Implicitly convert a <see cref="PlainDateTimeAttributeValue" /> to a
+	/// typed <see cref="PlainDateTimeAttributeValue{TModel}" />.
+	/// </summary>
+	public static implicit operator PlainDateTimeAttributeValue<TModel>(
+		PlainDateTimeAttributeValue value
+	)
+	{
+		return value switch
+		{
+			DateTime dt => dt == default ? default(PlainDateTimeAttributeValue<TModel>) : dt,
+			DateOnly d => d == default ? default(PlainDateTimeAttributeValue<TModel>) : d,
+		};
+	}
 }

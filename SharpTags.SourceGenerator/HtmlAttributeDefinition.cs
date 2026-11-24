@@ -12,7 +12,7 @@ internal sealed record HtmlAttributeDefinition
 	public required string Name { get; init; }
 
 	/// <summary>
-	/// A Pascal-case name that, when converted to lowercase, is the actual name
+	/// A Pascal-cased name that, when converted to lowercase, is the actual name
 	/// used for this attribute in HTML.<br />
 	/// If absent, <see cref="Name" /> is used instead.
 	/// </summary>
@@ -43,55 +43,148 @@ internal sealed record HtmlAttributeDefinition
 	/// </summary>
 	public string? Summary { get; init; }
 
-	internal byte[] GetClassName()
+	/// <summary>
+	/// Returns the name of the <c>HtmlAttribute&lt;TModel&gt;</c>
+	/// implementation in UTF-8 with its fully qualified namespace.
+	/// </summary>
+	public byte[] GetClassName()
 	{
-		return Type switch
-		{
-			HtmlAttributeType.String => "StringAttribute<TModel>"u8.ToArray(),
-			HtmlAttributeType.Enum =>
-				Encoding.UTF8.GetBytes($"EnumAttribute<TModel, {Enum ?? Name}, {Enum ?? Name}Attribute>"),
-			HtmlAttributeType.Bool => "BooleanAttribute<TModel>"u8.ToArray(),
-			HtmlAttributeType.Ternary =>
-				Encoding.UTF8.GetBytes($"TernaryAttribute<TModel, {Name}Attribute>"),
-			HtmlAttributeType.Int => "IntegerAttribute<TModel>"u8.ToArray(),
-			HtmlAttributeType.Number => "NumberAttribute<TModel>"u8.ToArray(),
-			HtmlAttributeType.List => "ListAttribute<TModel>"u8.ToArray(),
-			HtmlAttributeType.EnumList =>
-				Encoding.UTF8.GetBytes($"EnumListAttribute<TModel, {Enum ?? Name}, {Enum ?? Name}Attribute>"),
-			HtmlAttributeType.Char => "CharAttribute<TModel>"u8.ToArray(),
-			HtmlAttributeType.Uri => "StringAttribute<TModel>"u8.ToArray(),
-			HtmlAttributeType.MimeType => "StringAttribute<TModel>"u8.ToArray(),
-			HtmlAttributeType.PlainDateTime => "PlainDateTimeAttribute<TModel>"u8.ToArray(),
-			HtmlAttributeType.SourceDocument => "SourceDocumentAttribute<TModel>"u8.ToArray(),
-			_ => throw new(),
-		};
+		return
+		[
+			.."global::SharpTags.Nodes.Html.Attributes."u8,
+			..(byte[])(Type switch
+			{
+				HtmlAttributeType.String => [.."StringAttribute<TModel>"u8],
+				HtmlAttributeType.Enum =>
+				[
+					.."EnumAttribute<TModel, "u8,
+					.."global::SharpTags.Nodes.Html.Attributes.Values."u8,
+					..Encoding.UTF8.GetBytes(Enum ?? Name),
+					..", "u8,
+					.."global::SharpTags.Nodes.Html.Attributes."u8,
+					..Encoding.UTF8.GetBytes(Enum ?? Name),
+					.."Attribute>"u8,
+				],
+				HtmlAttributeType.Bool => [.."BooleanAttribute<TModel>"u8],
+				HtmlAttributeType.Ternary =>
+				[
+					.."TernaryAttribute<TModel, "u8,
+					.."global::SharpTags.Nodes.Html.Attributes."u8,
+					..Encoding.UTF8.GetBytes(Name),
+					.."Attribute>"u8,
+				],
+				HtmlAttributeType.Int => [.."IntegerAttribute<TModel>"u8],
+				HtmlAttributeType.Number => [.."NumberAttribute<TModel>"u8],
+				HtmlAttributeType.List => [.."ListAttribute<TModel>"u8],
+				HtmlAttributeType.EnumList =>
+				[
+					.."EnumListAttribute<TModel, "u8,
+					.."global::SharpTags.Nodes.Html.Attributes.Values."u8,
+					..Encoding.UTF8.GetBytes(Enum ?? Name),
+					..", "u8,
+					.."global::SharpTags.Nodes.Html.Attributes."u8,
+					..Encoding.UTF8.GetBytes(Enum ?? Name),
+					.."Attribute>"u8,
+				],
+				HtmlAttributeType.Char => [.."CharAttribute<TModel>"u8],
+				HtmlAttributeType.Uri => [.."StringAttribute<TModel>"u8],
+				HtmlAttributeType.MimeType => [.."StringAttribute<TModel>"u8],
+				HtmlAttributeType.PlainDateTime => [.."PlainDateTimeAttribute<TModel>"u8],
+				HtmlAttributeType.SourceDocument => [.."SourceDocumentAttribute<TModel>"u8],
+				_ => throw new(),
+			}),
+		];
 	}
 
-	internal byte[] GetValueType()
+	public byte[] GetGenericValueType()
 	{
 		return Type switch
 		{
 			HtmlAttributeType.Enum =>
 			[
-				.."EnumAttributeValue<TModel, global::SharpTags.Nodes.Html.Attributes.Values."u8,
+				.."global::SharpTags.Nodes.Html.Attributes.Values.EnumAttributeValue"u8,
+				.."<TModel, global::SharpTags.Nodes.Html.Attributes.Values."u8,
 				..Encoding.UTF8.GetBytes(Enum ?? Name),
-				(byte)'>'
+				(byte)'>',
 			],
-			HtmlAttributeType.Bool => "BooleanAttributeValue<TModel>"u8.ToArray(),
-			HtmlAttributeType.Ternary => "TernaryAttributeValue<TModel>"u8.ToArray(),
-			HtmlAttributeType.Int => "IntegerAttributeValue<TModel>"u8.ToArray(),
-			HtmlAttributeType.Number => "NumberAttributeValue<TModel>"u8.ToArray(),
-			HtmlAttributeType.List => "ListAttributeValue<TModel>"u8.ToArray(),
+			HtmlAttributeType.Bool =>
+			[
+				.."global::SharpTags.Nodes.Html.Attributes.Values.BooleanAttributeValue<TModel>"u8,
+			],
+			HtmlAttributeType.Ternary =>
+			[
+				.."global::SharpTags.Nodes.Html.Attributes.Values.TernaryAttributeValue<TModel>"u8,
+			],
+			HtmlAttributeType.Int =>
+			[
+				.."global::SharpTags.Nodes.Html.Attributes.Values.IntegerAttributeValue<TModel>"u8,
+			],
+			HtmlAttributeType.Number =>
+			[
+				.."global::SharpTags.Nodes.Html.Attributes.Values.NumberAttributeValue<TModel>"u8,
+			],
+			HtmlAttributeType.List =>
+			[
+				.."global::SharpTags.Nodes.Html.Attributes.Values.ListAttributeValue<TModel>"u8,
+			],
 			HtmlAttributeType.EnumList =>
 			[
-				.."EnumListAttributeValue<TModel, global::SharpTags.Nodes.Html.Attributes.Values."u8,
+				.."global::SharpTags.Nodes.Html.Attributes.Values.EnumListAttributeValue"u8,
+				.."<TModel, global::SharpTags.Nodes.Html.Attributes.Values."u8,
 				..Encoding.UTF8.GetBytes(Enum ?? Name),
 				..">"u8,
 			],
-			HtmlAttributeType.Char => "CharAttributeValue<TModel>"u8.ToArray(),
-			HtmlAttributeType.PlainDateTime => "PlainDateTimeAttributeValue<TModel>"u8.ToArray(),
-			HtmlAttributeType.SourceDocument => "SourceDocumentAttributeValue<TModel>"u8.ToArray(),
-			_ => "StringAttributeValue<TModel>"u8.ToArray(),
+			HtmlAttributeType.Char =>
+			[
+				.."global::SharpTags.Nodes.Html.Attributes.Values.CharAttributeValue<TModel>"u8,
+			],
+			HtmlAttributeType.PlainDateTime =>
+			[
+				.."global::SharpTags.Nodes.Html.Attributes.Values."u8,
+				.."PlainDateTimeAttributeValue<TModel>"u8,
+			],
+			HtmlAttributeType.SourceDocument =>
+			[
+				.."global::SharpTags.Nodes.Html.Attributes.Values."u8,
+				.."SourceDocumentAttributeValue<TModel>"u8,
+			],
+			_ =>
+			[
+				.."global::SharpTags.Nodes.Html.Attributes.Values.StringAttributeValue<TModel>"u8,
+			],
+		};
+	}
+
+	public byte[] GetNonGenericValueType()
+	{
+		return Type switch
+		{
+			HtmlAttributeType.Enum =>
+			[
+				.."global::SharpTags.Nodes.Html.Attributes.Values."u8,
+				..Encoding.UTF8.GetBytes(Enum ?? Name),
+			],
+			HtmlAttributeType.Bool => [.."bool"u8],
+			HtmlAttributeType.Ternary => [.."bool?"u8],
+			HtmlAttributeType.Int => [.."int?"u8],
+			HtmlAttributeType.Number => [.."double?"u8],
+			HtmlAttributeType.List =>
+			[
+				.."global::SharpTags.Nodes.Html.Attributes.Values.ListAttributeValue"u8,
+			],
+			HtmlAttributeType.EnumList =>
+			[
+				.."global::SharpTags.Nodes.Html.Attributes.Values.EnumListAttributeValue"u8,
+				.."<global::SharpTags.Nodes.Html.Attributes.Values."u8,
+				..Encoding.UTF8.GetBytes(Enum ?? Name),
+				..">"u8,
+			],
+			HtmlAttributeType.Char => [.."char?"u8],
+			HtmlAttributeType.PlainDateTime =>
+			[
+				.."global::SharpTags.Nodes.Html.Attributes.Values.PlainDateTimeAttributeValue"u8,
+			],
+			_ => [.."global::SharpTags.PlainText?"u8],
 		};
 	}
 }

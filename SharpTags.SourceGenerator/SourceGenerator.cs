@@ -254,7 +254,7 @@ internal sealed class SourceGenerator : IAsyncDisposable
 	{
 		await this.Write(seeAlsoPrefix);
 		await this.fileStream.WriteAsync(seeAlsoHref);
-		foreach(var part in href)
+		foreach (var part in href)
 		{
 			await this.fileStream.WriteAsync(part);
 		}

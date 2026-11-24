@@ -80,7 +80,10 @@ internal sealed class AttributeGenerator
 
 		var enumName = Encoding.UTF8.GetBytes(attribute.Enum ?? attribute.Name);
 
-		var filePath = Path.Join(this.directory, $"{Encoding.UTF8.GetString(enumName)}Attribute.gen.cs");
+		var filePath = Path.Join(
+			this.directory,
+			$"{attribute.Enum ?? attribute.Name}Attribute.gen.cs"
+		);
 		await using var fileStream = File.Open(filePath, FileMode.Create, FileAccess.Write);
 		await using var generator = new SourceGenerator(fileStream, "\t"u8.ToArray());
 
@@ -90,15 +93,20 @@ internal sealed class AttributeGenerator
 		await generator.Write("internal sealed partial class ");
 		await generator.Write(enumName);
 		await generator.Write("Attribute");
-		await generator.Write(" : IEnumAttribute<Values.");
+		await generator.Write(" : ");
+		await generator.Write("global::");
+		await generator.Write(attributesNamespace);
+		await generator.Write(".IEnumAttribute<global::");
+		await generator.Write(attributesNamespace);
+		await generator.Write(".Values.");
 		await generator.Write(enumName);
 		await generator.Write(">");
 
 		await using var classBlock = await generator.Block();
 
-		await generator.Write(
-			"public static global::System.ReadOnlyMemory<byte> Name => AttributeNames."
-		);
+		await generator.Write("public static global::System.ReadOnlyMemory<byte> Name => global::");
+		await generator.Write(attributesNamespace);
+		await generator.Write(".AttributeNames.");
 		await generator.Write(attribute.Name);
 		await generator.Write(";");
 		await generator.NewLine();

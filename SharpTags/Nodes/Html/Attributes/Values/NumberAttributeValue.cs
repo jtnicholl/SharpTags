@@ -34,4 +34,22 @@ public readonly union NumberAttributeValue<TModel>(
 			null => null,
 		};
 	}
+
+	/// <summary>
+	/// Implicitly convert a nullable <see langword="double" /> to a
+	/// <see cref="NumberAttributeValue{TModel}" />.
+	/// </summary>
+	public static implicit operator NumberAttributeValue<TModel>(double? value)
+	{
+		return value is double d ? new(d) : default;
+	}
+
+	/// <summary>
+	/// Implicitly convert a nullable <see langword="int" /> to a
+	/// <see cref="NumberAttributeValue{TModel}" />.
+	/// </summary>
+	public static implicit operator NumberAttributeValue<TModel>(int? value)
+	{
+		return value is int i ? new(i) : default;
+	}
 }

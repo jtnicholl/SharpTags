@@ -42,4 +42,19 @@ public readonly union EnumListAttributeValue<TModel, TEnum>(
 	{
 		return value is TEnum e ? new(e) : default;
 	}
+
+	/// <summary>
+	/// Implicitly convert a <see cref="EnumListAttributeValue{TEnum}" /> to a
+	/// typed <see cref="EnumListAttributeValue{TModel, TEnum}" />.
+	/// </summary>
+	public static implicit operator EnumListAttributeValue<TModel, TEnum>(
+		EnumListAttributeValue<TEnum> value
+	)
+	{
+		return value switch
+		{
+			TEnum e => !e.Equals(default(TEnum)) ? new(e) : default,
+			IEnumerable<TEnum> ie => new(ie),
+		};
+	}
 }

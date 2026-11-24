@@ -44,7 +44,7 @@ public sealed class ConditionalNode<TModel> : MarkupNode<TModel>
 			{
 				foreach (var child in this.children[i])
 				{
-					await child.Render(utf8Stream, model, cancel).ConfigureAwait(false);
+					await child.RenderAsync(utf8Stream, model, cancel).ConfigureAwait(false);
 				}
 				break;
 			}
@@ -65,7 +65,7 @@ public sealed class ConditionalNode<TModel> : MarkupNode<TModel>
 			{
 				foreach (var child in this.children[i])
 				{
-					await child.Render(utf8Pipe, model, cancel).ConfigureAwait(false);
+					await child.RenderAsync(utf8Pipe, model, cancel).ConfigureAwait(false);
 				}
 				break;
 			}

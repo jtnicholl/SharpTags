@@ -104,6 +104,16 @@ public abstract class MarkupNode<TModel> :
 		return text is null ? null : new TextNode<TModel>(text);
 	}
 
+	/// <summary>
+	/// Implicitly convert from an untyped <see cref="MarkupNode" /> to a
+	/// genric-typed <see cref="MarkupNode{TModel}" />.
+	/// </summary>
+	[return: NotNullIfNotNull(nameof(node))]
+	public static implicit operator MarkupNode<TModel>?(MarkupNode? node)
+	{
+		return node?.AsTyped<TModel>();
+	}
+
 	[SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
 	internal IEnumerable<BuiltMarkupSegment<TModel>> Build(
 		Dictionary<object, IEnumerable> cache,

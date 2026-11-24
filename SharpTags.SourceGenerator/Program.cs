@@ -42,10 +42,12 @@ internal static class Program
 				.Distinct()
 		);
 
-		await elementGenerator.WriteBaseHtmlElement();
+		await elementGenerator.WriteGenericBaseHtmlElement();
+		await elementGenerator.WriteNonGenericBaseHtmlElement();
 		foreach (var element in elements.Html)
 		{
-			await elementGenerator.WriteHtmlElement(element);
+			await elementGenerator.WriteGenericHtmlElement(element);
+			await elementGenerator.WriteNonGenericHtmlElement(element);
 		}
 
 		foreach (

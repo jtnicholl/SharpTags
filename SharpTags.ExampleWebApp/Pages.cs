@@ -10,17 +10,17 @@ namespace SharpTags.ExampleWebApp;
 internal static class Pages
 {
 	private static readonly RequestHandler<BasePageModel> home = new(
-		Layouts.Default(
+		Layouts.Default<BasePageModel>(
 			Layouts.AppName,
-			new Heading1<BasePageModel>(Layouts.AppName),
-			new Paragraph<BasePageModel>($"Hello and welcome to {Layouts.AppName}!")
+			new Heading1(Layouts.AppName),
+			new Paragraph($"Hello and welcome to {Layouts.AppName}!")
 		)
 	);
 
 	private static readonly RequestHandler<ElephantListPageModel> elephants = new(
 		Layouts.Default(
 			Layouts.AppName,
-			new Heading2<ElephantListPageModel>("Elephants"),
+			new Heading2("Elephants"),
 			new UnorderedList<ElephantListPageModel>(
 				new ListItem<ElephantListing>(
 					new Anchor<ElephantListing>
@@ -40,7 +40,7 @@ internal static class Pages
 			new Heading2<ElephantDetailPageModel>(
 				new TextNode<ElephantDetailPageModel>(e => e.Elephant.Name)
 			),
-			new Anchor<ElephantDetailPageModel>("Back")
+			new Anchor("Back")
 			{
 				Class = "link",
 				Href = "/elephants"
@@ -48,7 +48,7 @@ internal static class Pages
 			new Table<ElephantDetailPageModel>(
 				new TableBody<ElephantDetailPageModel>(
 					new TableRow<ElephantDetailPageModel>(
-						new TableHeader<ElephantDetailPageModel>("Birthday"),
+						new TableHeader("Birthday"),
 						new TableData<ElephantDetailPageModel>(
 							new Time<ElephantDetailPageModel>
 							{
@@ -61,7 +61,7 @@ internal static class Pages
 						)
 					),
 					new TableRow<ElephantDetailPageModel>(
-						new TableHeader<ElephantDetailPageModel>("Favorite Foods"),
+						new TableHeader("Favorite Foods"),
 						new TableData<ElephantDetailPageModel>(
 							new UnorderedList<ElephantDetailPageModel>(
 								new ListItem<string>(
@@ -76,10 +76,10 @@ internal static class Pages
 	);
 
 	private static readonly RequestHandler<BasePageModel> privacy = new(
-		Layouts.Default(
+		Layouts.Default<BasePageModel>(
 			Layouts.AppName,
-			new Heading2<BasePageModel>("Privacy Policy"),
-			new Paragraph<BasePageModel>("Use this page to share your website’s privacy policy.")
+			new Heading2("Privacy Policy"),
+			new Paragraph("Use this page to share your website’s privacy policy.")
 		)
 	);
 
