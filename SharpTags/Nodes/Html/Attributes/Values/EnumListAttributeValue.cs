@@ -40,6 +40,6 @@ public readonly union EnumListAttributeValue<TModel, TEnum>(
 	/// </summary>
 	public static implicit operator EnumListAttributeValue<TModel, TEnum>(TEnum? value)
 	{
-		return value ?? default(EnumListAttributeValue<TModel, TEnum>);
+		return value is TEnum e ? new(e) : default;
 	}
 }

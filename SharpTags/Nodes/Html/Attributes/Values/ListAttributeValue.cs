@@ -61,6 +61,6 @@ public readonly union ListAttributeValue<TModel>(
 	/// </summary>
 	public static implicit operator ListAttributeValue<TModel>(PlainText? value)
 	{
-		return value ?? default(ListAttributeValue<TModel>);
+		return value is PlainText pt ? new(pt) : default;
 	}
 }

@@ -36,6 +36,6 @@ public readonly union CharAttributeValue<TModel>(
 	/// </summary>
 	public static implicit operator CharAttributeValue<TModel>(char? value)
 	{
-		return value ?? default(CharAttributeValue<TModel>);
+		return value is char c ? new(c) : default;
 	}
 }

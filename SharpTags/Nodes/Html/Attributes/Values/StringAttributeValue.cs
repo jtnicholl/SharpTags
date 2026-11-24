@@ -54,6 +54,6 @@ public readonly union StringAttributeValue<TModel>(
 	/// </summary>
 	public static implicit operator StringAttributeValue<TModel>(PlainText? value)
 	{
-		return value ?? default(StringAttributeValue<TModel>);
+		return value is PlainText pt ? new(pt) : default;
 	}
 }

@@ -35,6 +35,6 @@ public readonly union TernaryAttributeValue<TModel>(
 	/// </summary>
 	public static implicit operator TernaryAttributeValue<TModel>(bool? value)
 	{
-		return value ?? default(TernaryAttributeValue<TModel>);
+		return value is bool b ? new(b) : default;
 	}
 }
