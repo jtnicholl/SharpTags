@@ -22,17 +22,29 @@ public abstract class MarkupNode<TModel> :
 	internal abstract bool RequiresModel { get; }
 
 	/// <inheritdoc />
-	public abstract ValueTask Render(
+	public ValueTask Render(Stream utf8Stream, TModel model, CancellationToken cancel = default)
+	{
+		ArgumentNullException.ThrowIfNull(utf8Stream);
+		return RenderAsync(utf8Stream, model, cancel);
+	}
+
+	internal abstract ValueTask RenderAsync(
 		Stream utf8Stream,
 		TModel model,
-		CancellationToken cancel = default
+		CancellationToken cancel
 	);
 
 	/// <inheritdoc />
-	public abstract ValueTask Render(
+	public ValueTask Render(PipeWriter utf8Pipe, TModel model, CancellationToken cancel = default)
+	{
+		ArgumentNullException.ThrowIfNull(utf8Pipe);
+		return RenderAsync(utf8Pipe, model, cancel);
+	}
+
+	internal abstract ValueTask RenderAsync(
 		PipeWriter utf8Pipe,
 		TModel model,
-		CancellationToken cancel = default
+		CancellationToken cancel
 	);
 
 	/// <inheritdoc />

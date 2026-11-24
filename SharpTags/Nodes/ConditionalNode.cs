@@ -30,10 +30,10 @@ public sealed class ConditionalNode<TModel> : MarkupNode<TModel>
 	}
 
 	/// <inheritdoc />
-	public override async ValueTask Render(
+	internal override async ValueTask RenderAsync(
 		Stream utf8Stream,
 		TModel model,
-		CancellationToken cancel = default
+		CancellationToken cancel
 	)
 	{
 		for (int i = 0; i < this.conditions.Length; i++)
@@ -51,11 +51,10 @@ public sealed class ConditionalNode<TModel> : MarkupNode<TModel>
 		}
 	}
 
-	/// <inheritdoc />
-	public override async ValueTask Render(
+	internal override async ValueTask RenderAsync(
 		PipeWriter utf8Pipe,
 		TModel model,
-		CancellationToken cancel = default
+		CancellationToken cancel
 	)
 	{
 		for (int i = 0; i < this.conditions.Length; i++)
@@ -76,6 +75,7 @@ public sealed class ConditionalNode<TModel> : MarkupNode<TModel>
 	/// <inheritdoc />
 	public override void Render(IBufferWriter<byte> utf8Buffer, TModel model)
 	{
+		ArgumentNullException.ThrowIfNull(utf8Buffer);
 		for (int i = 0; i < this.conditions.Length; i++)
 		{
 			var evaluation = this.conditions[i].Invoke(model);
@@ -104,7 +104,7 @@ public sealed class ConditionalNode<TModel> : MarkupNode<TModel>
 			var startCount = buffer.Count;
 			if (startCount != 0)
 			{
-				buffer.Add(new SkipCondition<TModel>(default, 0, startCount));
+				buffer.Add(new SkipCondition<TModel>(null, 0, startCount));
 			}
 
 			for (int j = this.children[i].Length - 1; j >= 0; j--)

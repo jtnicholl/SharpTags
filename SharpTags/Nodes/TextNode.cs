@@ -48,29 +48,20 @@ public sealed class TextNode<TModel> : MarkupNode<TModel>, IEquatable<TextNode<T
 		this.Text = textFunction;
 	}
 
-	/// <inheritdoc />
-	public override ValueTask Render(
+	internal override ValueTask RenderAsync(
 		Stream utf8Stream,
 		TModel model,
-		CancellationToken cancel = default
+		CancellationToken cancel
 	)
 	{
-		ArgumentNullException.ThrowIfNull(utf8Stream);
 		return utf8Stream.WriteAsync(Text.Evaluate(model).Utf8Bytes, cancel);
 	}
 
-	/// <inheritdoc />
-	public override ValueTask Render(
+	internal override async ValueTask RenderAsync(
 		PipeWriter utf8Pipe,
 		TModel model,
-		CancellationToken cancel = default
+		CancellationToken cancel
 	)
-	{
-		ArgumentNullException.ThrowIfNull(utf8Pipe);
-		return RenderAsync(utf8Pipe, model, cancel);
-	}
-
-	private async ValueTask RenderAsync(PipeWriter utf8Pipe, TModel model, CancellationToken cancel)
 	{
 		await utf8Pipe.WriteAsync(Text.Evaluate(model).Utf8Bytes, cancel).ConfigureAwait(false);
 	}
@@ -78,6 +69,7 @@ public sealed class TextNode<TModel> : MarkupNode<TModel>, IEquatable<TextNode<T
 	/// <inheritdoc />
 	public override void Render(IBufferWriter<byte> utf8Buffer, TModel model)
 	{
+		ArgumentNullException.ThrowIfNull(utf8Buffer);
 		var text = Text.Evaluate(model);
 		utf8Buffer.Write(text.Utf8Bytes.Span);
 	}

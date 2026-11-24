@@ -36,49 +36,25 @@ public sealed class TernaryNode<TModel> : MarkupNode<TModel>
 		this.fallback = fallback;
 	}
 
-	/// <inheritdoc />
-	public override ValueTask Render(
+	internal override async ValueTask RenderAsync(
 		Stream utf8Stream,
-		TModel model,
-		CancellationToken cancel = default
-	)
-	{
-		ArgumentNullException.ThrowIfNull(utf8Stream);
-		return RenderAsync(utf8Stream, Evaluate(model), model, cancel);
-	}
-
-	private static async ValueTask RenderAsync(
-		Stream utf8Stream,
-		ImmutableArray<MarkupNode<TModel>> nodes,
 		TModel model,
 		CancellationToken cancel
 	)
 	{
-		foreach (var node in nodes)
+		foreach (var node in Evaluate(model))
 		{
 			await node.Render(utf8Stream, model, cancel).ConfigureAwait(false);
 		}
 	}
 
-	/// <inheritdoc />
-	public override ValueTask Render(
+	internal override async ValueTask RenderAsync(
 		PipeWriter utf8Pipe,
-		TModel model,
-		CancellationToken cancel = default
-	)
-	{
-		ArgumentNullException.ThrowIfNull(utf8Pipe);
-		return RenderAsync(utf8Pipe, Evaluate(model), model, cancel);
-	}
-
-	private static async ValueTask RenderAsync(
-		PipeWriter utf8Pipe,
-		ImmutableArray<MarkupNode<TModel>> nodes,
 		TModel model,
 		CancellationToken cancel
 	)
 	{
-		foreach (var node in nodes)
+		foreach (var node in Evaluate(model))
 		{
 			await node.Render(utf8Pipe, model, cancel).ConfigureAwait(false);
 		}

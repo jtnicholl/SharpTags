@@ -33,28 +33,6 @@ public sealed class ForEachNode<TModel, TIterated> : MarkupNode<TModel>
 	}
 
 	/// <inheritdoc />
-	public override ValueTask Render(
-		Stream utf8Stream,
-		TModel model,
-		CancellationToken cancel = default
-	)
-	{
-		ArgumentNullException.ThrowIfNull(utf8Stream);
-		return RenderAsync(utf8Stream, model, cancel);
-	}
-
-	/// <inheritdoc />
-	public override ValueTask Render(
-		PipeWriter utf8Pipe,
-		TModel model,
-		CancellationToken cancel = default
-	)
-	{
-		ArgumentNullException.ThrowIfNull(utf8Pipe);
-		return RenderAsync(utf8Pipe, model, cancel);
-	}
-
-	/// <inheritdoc />
 	public override void Render(IBufferWriter<byte> utf8Buffer, TModel model)
 	{
 		ArgumentNullException.ThrowIfNull(utf8Buffer);
@@ -81,7 +59,11 @@ public sealed class ForEachNode<TModel, TIterated> : MarkupNode<TModel>
 			: [];
 	}
 
-	private async ValueTask RenderAsync(Stream utf8Stream, TModel model, CancellationToken cancel)
+	internal override async ValueTask RenderAsync(
+		Stream utf8Stream,
+		TModel model,
+		CancellationToken cancel
+	)
 	{
 		foreach (var item in this.iterator.Invoke(model))
 		{
@@ -92,7 +74,11 @@ public sealed class ForEachNode<TModel, TIterated> : MarkupNode<TModel>
 		}
 	}
 
-	private async ValueTask RenderAsync(PipeWriter utf8Pipe, TModel model, CancellationToken cancel)
+	internal override async ValueTask RenderAsync(
+		PipeWriter utf8Pipe,
+		TModel model,
+		CancellationToken cancel
+	)
 	{
 		foreach (var item in this.iterator.Invoke(model))
 		{

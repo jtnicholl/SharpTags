@@ -41,18 +41,11 @@ public closed class MarkupElement<TModel> : MarkupNode<TModel>
 		this.Children = children;
 	}
 
-	/// <inheritdoc />
-	public override ValueTask Render(
+	internal override async ValueTask RenderAsync(
 		Stream utf8Stream,
 		TModel model,
-		CancellationToken cancel = default
+		CancellationToken cancel
 	)
-	{
-		ArgumentNullException.ThrowIfNull(utf8Stream);
-		return RenderAsync(utf8Stream, model, cancel);
-	}
-
-	private async ValueTask RenderAsync(Stream utf8Stream, TModel model, CancellationToken cancel)
 	{
 		await utf8Stream.WriteAsync(MarkupElement.LessThan, cancel).ConfigureAwait(false);
 		await utf8Stream.WriteAsync(this.name, cancel).ConfigureAwait(false);
@@ -61,11 +54,11 @@ public closed class MarkupElement<TModel> : MarkupNode<TModel>
 			await attribute.Render(utf8Stream, model, cancel).ConfigureAwait(false);
 		}
 
-		if (!SelfClosing || this.Children.Count != 0)
+		if (!SelfClosing || Children.Count != 0)
 		{
 			await utf8Stream.WriteAsync(MarkupElement.GreaterThan, cancel).ConfigureAwait(false);
 
-			foreach (var child in this.Children)
+			foreach (var child in Children)
 			{
 				await child.Render(utf8Stream, model, cancel).ConfigureAwait(false);
 			}
@@ -81,18 +74,11 @@ public closed class MarkupElement<TModel> : MarkupNode<TModel>
 		}
 	}
 
-	/// <inheritdoc />
-	public override ValueTask Render(
+	internal override async ValueTask RenderAsync(
 		PipeWriter utf8Pipe,
 		TModel model,
-		CancellationToken cancel = default
+		CancellationToken cancel
 	)
-	{
-		ArgumentNullException.ThrowIfNull(utf8Pipe);
-		return RenderAsync(utf8Pipe, model, cancel);
-	}
-
-	private async ValueTask RenderAsync(PipeWriter utf8Pipe, TModel model, CancellationToken cancel)
 	{
 		await utf8Pipe.WriteAsync(MarkupElement.LessThan, cancel).ConfigureAwait(false);
 		await utf8Pipe.WriteAsync(this.name, cancel).ConfigureAwait(false);
@@ -101,11 +87,11 @@ public closed class MarkupElement<TModel> : MarkupNode<TModel>
 			await attribute.Render(utf8Pipe, model, cancel).ConfigureAwait(false);
 		}
 
-		if (!SelfClosing || this.Children.Count != 0)
+		if (!SelfClosing || Children.Count != 0)
 		{
 			await utf8Pipe.WriteAsync(MarkupElement.GreaterThan, cancel).ConfigureAwait(false);
 
-			foreach (var child in this.Children)
+			foreach (var child in Children)
 			{
 				await child.Render(utf8Pipe, model, cancel).ConfigureAwait(false);
 			}
@@ -132,11 +118,11 @@ public closed class MarkupElement<TModel> : MarkupNode<TModel>
 			attribute.Render(utf8Buffer, model);
 		}
 
-		if (!SelfClosing || this.Children.Count != 0)
+		if (!SelfClosing || Children.Count != 0)
 		{
 			utf8Buffer.Write(MarkupElement.GreaterThan.Span);
 
-			foreach (var child in this.Children)
+			foreach (var child in Children)
 			{
 				child.Render(utf8Buffer, model);
 			}
@@ -158,7 +144,7 @@ public closed class MarkupElement<TModel> : MarkupNode<TModel>
 		{
 			throw new RecursiveRelationshipException(Encoding.UTF8.GetString(this.name.Span));
 		}
-		foreach (var child in this.Children)
+		foreach (var child in Children)
 		{
 			child.RecursionCheck(set);
 		}
